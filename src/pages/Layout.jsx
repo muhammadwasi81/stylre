@@ -1,16 +1,18 @@
-import { Helmet } from 'react-helmet'
+// import { Helmet } from 'react-helmet'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
-
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 const Layout = ({ children, title }) => {
   return (
     <>
-      <Helmet>
-        <title>{`Stylre - ${title}`}</title>
-      </Helmet>
-      <Nav />
-      <main>{children}</main>
-      <Footer />
+      <HelmetProvider>
+        <Helmet>
+          <title>{`Stylre - ${title}`}</title>
+        </Helmet>
+        <Nav />
+        <main>{children}</main>
+        <Footer />
+      </HelmetProvider>
     </>
   )
 }

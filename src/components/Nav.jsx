@@ -59,7 +59,7 @@ const Nav = () => {
               <>
                 <div className="d-flex justify-content-end ml-auto">
                   <li className="nav-item">
-                    <Link to="/login" className="btn btn-primary me-2">
+                    <Link to="/Login" className="btn btn-primary me-2">
                       <FaSignInAlt className="me-2" /> Login
                     </Link>
                   </li>

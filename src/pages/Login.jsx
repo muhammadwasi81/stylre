@@ -24,7 +24,8 @@ const Login = () => {
     }
     if (isSuccess || user) {
       toast.success('User logged in successfully')
-      navigate('/')
+      // navigate('/')
+      window.location.href = '/'
     }
     return () => {
       dispatch(reset())
@@ -39,6 +40,7 @@ const Login = () => {
   }
   const onSubmit = (e) => {
     e.preventDefault()
+    e.stopPropagation()
     if (!email || !password) {
       return toast.error('Please fill all the fields')
     }
