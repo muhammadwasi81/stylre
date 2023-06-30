@@ -8,7 +8,6 @@ const Dashboard = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
-  console.log(user, 'user')
   useEffect(() => {
     if (!user) navigate('/Login')
 
@@ -19,9 +18,7 @@ const Dashboard = () => {
 
   return (
     <Layout title="Dashboard">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla tenetur hic
-      voluptatum quos debitis nostrum quasi explicabo consequatur et natus iure
-      libero officiis, minima maxime eum deleniti. Tenetur, voluptates id?
+      <h1>Dashboard</h1>
     </Layout>
   )
 }
