@@ -74,6 +74,7 @@ const Register = () => {
   }
   return (
     <Layout title="Register">
+      {isLoading && <Loader />}
       <section className="container loginWrapper">
         <h1 className="text-primary">Sign Up</h1>
         <form onSubmit={onSubmit}>
