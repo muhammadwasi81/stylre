@@ -40,7 +40,6 @@ const Login = () => {
   }
   const onSubmit = (e) => {
     e.preventDefault()
-    e.stopPropagation()
     if (!email || !password) {
       return toast.error('Please fill all the fields')
     }
@@ -50,6 +49,11 @@ const Login = () => {
     }
     console.log(userData, 'userData')
     dispatch(loginAction(userData))
+    isSuccess &&
+      formData({
+        email: '',
+        password: '',
+      })
   }
   return (
     <>

@@ -8,7 +8,7 @@ const Nav = () => {
   const { user } = useSelector((state) => state.auth)
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  console.log(user, 'user in nav')
+  // console.log(user, 'user in nav')
 
   const onLogout = () => {
     dispatch(logoutAction())
