@@ -23,13 +23,14 @@ const Register = () => {
   const { userName, email, phoneNumber, password, confirmPassword } = formData
   useEffect(() => {
     if (isError) {
-      toast.error(message)
+      return toast.error(message)
     }
     if (isSuccess || user) {
       toast.success('User registered successfully')
       setTimeout(() => {
         window.location.href = '/'
       }, 2000)
+      return
     }
     dispatch(reset())
   }, [dispatch, isSuccess, message, user, isLoading])

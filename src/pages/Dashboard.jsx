@@ -18,7 +18,11 @@ const Dashboard = () => {
 
   return (
     <Layout title="Dashboard">
-      <h1>Dashboard</h1>
+      <section className="container">
+        <h1 className="my-5">
+          welcome to the Dashboard {user?.data?.userName}
+        </h1>
+      </section>
     </Layout>
   )
 }
