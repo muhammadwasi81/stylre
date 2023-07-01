@@ -39,21 +39,24 @@ export const deliverySlice = createSlice({
       state.message = ''
     },
   },
-  extraReducers: {
-    [createDeliveryAction.pending]: (state) => {
-      state.isLoading = true
-    },
-    [createDeliveryAction.fulfilled]: (state, { payload }) => {
-      console.log(payload, 'payload')
-      state.isLoading = false
-      state.isSuccess = true
-      state.deliveries.push(payload)
-    },
-    [createDeliveryAction.rejected]: (state, { payload }) => {
-      state.isLoading = false
-      state.isError = true
-      state.message = payload
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(createDeliveryAction.pending, (state) => {
+        console.log('pending')
+        state.isLoading = true
+      })
+      .addCase(createDeliveryAction.fulfilled, (state, { payload }) => {
+        console.log(payload, 'fulfilled')
+        state.isLoading = false
+        state.isSuccess = true
+        state.deliveries.push(payload)
+      })
+      .addCase(createDeliveryAction.rejected, (state, { payload }) => {
+        console.log(payload, 'rejected')
+        state.isLoading = false
+        state.isError = true
+        state.message = payload
+      })
   },
 })
 
