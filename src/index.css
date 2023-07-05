@@ -39,6 +39,26 @@ body {
   flex-direction: column;
   align-items: center;
 }
+.paymentWrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 80vh;
+}
+
+.StripeElement {
+  margin: 15px auto;
+  padding: 10px 12px;
+  color: #32325d;
+  background-color: white;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
 
 @media (max-width: 600px) {
   .form-control {

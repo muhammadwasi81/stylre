@@ -6,6 +6,12 @@ import Register from './pages/Register'
 import NotFound from './pages/NotFound'
 import Dashboard from './pages/Dashboard'
 import CustomerInfo from './pages/CustomerInfo'
+import PaymentInfo from './pages/PaymentInfo'
+import { Elements } from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
+const stripePromise = loadStripe(
+  'pk_test_51MihFAKHS9EGHah4Zu1HV4k83qBovFz6HjJM1ACkqiLZstcTWfSisDTUZqGIbVDQJhqzrcioz1qpP4vlKehecqG900Xxexg2nu'
+)
 
 const App = () => {
   return (
@@ -17,6 +23,14 @@ const App = () => {
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/Info" element={<CustomerInfo />} />
+          <Route
+            path="/Payment"
+            element={
+              <Elements stripe={stripePromise}>
+                <PaymentInfo />
+              </Elements>
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
