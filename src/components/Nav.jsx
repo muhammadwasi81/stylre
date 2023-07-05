@@ -39,7 +39,7 @@ const Nav = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ml-auto mb-2 mb-lg-0">
+          <ul className="navbar-nav ml-auto mb-2 mb-lg-0 nav__login__btns">
             {user ? (
               <>
                 {navRoutes.map((route) => (
@@ -56,20 +56,18 @@ const Nav = () => {
                 </li>
               </>
             ) : (
-              <>
-                <div className="d-flex justify-content-end ml-auto">
-                  <li className="nav-item">
-                    <Link to="/Login" className="btn btn-primary me-2">
-                      <FaSignInAlt className="me-2" /> Login
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to="/register" className="btn btn-secondary">
-                      <FaUser className="me-2" /> Register
-                    </Link>
-                  </li>
-                </div>
-              </>
+              <div className="nav__login__btns">
+                <li className="nav-item">
+                  <Link to="/Login" className="btn btn-primary me-2">
+                    <FaSignInAlt className="me-2" /> Login
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/register" className="btn btn-secondary">
+                    <FaUser className="me-2" /> Register
+                  </Link>
+                </li>
+              </div>
             )}
           </ul>
         </div>

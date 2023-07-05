@@ -4,9 +4,9 @@ const Footer = () => {
   return (
     <footer
       className="bg-dark text-white text-center py-4"
-      style={{ position: 'relative', width: '100%', bottom: 0 }}
+      style={{ position: 'absolute', width: '100%', bottom: 'auto' }}
     >
-      &copy; All rights reserved | {new Date().getFullYear()}
+      &copy; All rights reserved | stylre {new Date().getFullYear()}
     </footer>
   )
 }

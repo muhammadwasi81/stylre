@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react'
 import Layout from './Layout'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { registerAction, reset } from '../features/auth/authSlice'
 import Loader from '../components/Loader'
 
 const Register = () => {
-  const navigate = useNavigate()
   const dispatch = useDispatch()
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
@@ -18,9 +17,11 @@ const Register = () => {
     phoneNumber: '',
     password: '',
     confirmPassword: '',
+    isChecked: false,
   })
 
-  const { userName, email, phoneNumber, password, confirmPassword } = formData
+  const { userName, email, phoneNumber, password, confirmPassword, isChecked } =
+    formData
   useEffect(() => {
     if (isError) {
       return toast.error(message)
@@ -41,6 +42,7 @@ const Register = () => {
     phoneNumber,
     password,
     confirmPassword,
+    isChecked,
   ]
 
   const handleChange = (e) => {
@@ -57,6 +59,20 @@ const Register = () => {
     if (password !== confirmPassword) {
       return toast.error('Password and confirm password does not match')
     }
+
+    const phoneRegex = /^\d{3}-\d{3}-\d{4}$/
+    if (!phoneNumber.match(phoneRegex)) {
+      return toast.error(
+        'Please enter a valid phone number in the format 111-123-4567'
+      )
+    }
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])/
+    if (!password.match(passwordRegex)) {
+      return toast.error(
+        'Password must include at least one uppercase and one lowercase letter'
+      )
+    }
+
     const userData = {
       userName,
       email,
@@ -76,9 +92,12 @@ const Register = () => {
   return (
     <Layout title="Register">
       {isLoading && <Loader />}
-      <section className="container loginWrapper">
-        <h1 className="text-primary">Sign Up</h1>
+      <section className="container signupWrapper">
         <form onSubmit={onSubmit}>
+          <h1 className="text-black fw-bolder">Create an Account</h1>
+          <p className="text-black fw-normal">
+            The faster you sign up, the faster you get the goods.
+          </p>
           <div className="form-group">
             <input
               type="text"
@@ -108,47 +127,67 @@ const Register = () => {
               id="phoneNumber"
               name="phoneNumber"
               value={phoneNumber}
-              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
               placeholder="111-123-1234"
               onChange={handleChange}
             />
           </div>
           <div className="form-group">
-            <div className="input-group">
-              <input
-                type={'password'}
-                className="form-control"
-                id="password"
-                name="password"
-                value={password}
-                placeholder="Enter your password"
-                onChange={handleChange}
-              />
-            </div>
+            <input
+              type={'password'}
+              className="form-control"
+              id="password"
+              name="password"
+              value={password}
+              placeholder="Enter your password"
+              onChange={handleChange}
+            />
           </div>
           <div className="form-group">
-            <div className="input-group">
-              <input
-                type={'password'}
-                className="form-control"
-                id="confirmPassword"
-                name="confirmPassword"
-                value={confirmPassword}
-                placeholder="Enter your confirm password"
-                onChange={handleChange}
-              />
-            </div>
+            <input
+              type={'password'}
+              className="form-control"
+              id="confirmPassword"
+              name="confirmPassword"
+              value={confirmPassword}
+              placeholder="Enter your confirm password"
+              onChange={handleChange}
+            />
           </div>
-          <div className="text-end">
+          <div className="form-group">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              checked={isChecked}
+              onChange={(e) =>
+                setFormData({ ...formData, isChecked: !isChecked })
+              }
+              id="flexCheckDefault"
+            />
+            <label className="form-check-label" htmlFor="flexCheckDefault">
+              &nbsp;I agree to the{' '}
+              <Link to="/terms" className="text-decoration-none text-primary">
+                Terms of Service
+              </Link>{' '}
+              and{' '}
+              <Link to="/privacy" className="text-decoration-none text-primary">
+                Privacy Policy
+              </Link>
+            </label>
+          </div>
+          <button
+            type="submit"
+            className="btn btn-primary w-100 my-2"
+            disabled={!isChecked}
+          >
+            Register
+          </button>
+          <div className="text-center">
             Already have an account?{' '}
-            <Link to="/Login" className="text-primary">
+            <Link to="/Login" className="text-decoration-none text-primary">
               {' '}
               Sign In
             </Link>
           </div>
-          <button type="submit" className="btn btn-primary w-100 my-2">
-            Register
-          </button>
         </form>
       </section>
     </Layout>

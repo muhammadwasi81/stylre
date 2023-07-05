@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import { loginAction, reset } from '../features/auth/authSlice'
 import Loader from '../components/Loader'
 import Layout from './Layout'
+import Logo from '../assets/img/logo.png'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -59,22 +60,29 @@ const Login = () => {
     <>
       <Layout title="Login">
         {isLoading && <Loader />}
+        <div className="d-flex justify-content-center login__img">
+          <img src={Logo} alt="logo" className="img-fluid mt-5" />
+        </div>
         <section className="container loginWrapper">
-          <h1 className="text-primary">Sign In</h1>
           <form onSubmit={onSubmit}>
+            <h1 className="text-start text-black fw-bolder mb-3">Sign In</h1>
             <div className="form-group">
-              <input
-                type="email"
-                className="form-control"
-                id="email"
-                name="email"
-                value={email}
-                placeholder="Enter your email"
-                onChange={handleChange}
-              />
+              <label className="form-label fw-bolder" htmlFor="email">
+                Email
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  name="email"
+                  value={email}
+                  placeholder="Enter your email"
+                  onChange={handleChange}
+                />
+              </label>
             </div>
             <div className="form-group">
-              <div className="input-group">
+              <label className="form-label fw-bolder" htmlFor="password">
+                Password
                 <input
                   type={'password'}
                   className="form-control"
@@ -84,18 +92,22 @@ const Login = () => {
                   placeholder="Enter your password"
                   onChange={handleChange}
                 />
-              </div>
+              </label>
             </div>
-            <div className="text-end">
-              Don't have an account?
-              <Link to="/Register" className="text-primary">
-                {' '}
-                Sign up
-              </Link>
-            </div>
-            <button type="submit" className="btn btn-primary w-100 my-2">
+            <button type="submit" className="btn btn-primary w-100">
               Login
             </button>
+            <div>
+              <p className="text-center mt-3">
+                Don't have an account?{' '}
+                <Link
+                  to="/register"
+                  className="text-decoration-none text-primary"
+                >
+                  Register
+                </Link>
+              </p>
+            </div>
           </form>
         </section>
       </Layout>

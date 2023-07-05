@@ -16,12 +16,25 @@ html {
 body {
   font-family: 'Poppins', sans-serif !important;
 }
+:root {
+  --primary: #f8931f;
+  --black: #000000;
+  --white: #ffffff;
+}
 .loginWrapper {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  height: 80vh;
+  margin-top: 40px;
+}
+.signupWrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 .form-control {
   width: 500px;
@@ -32,6 +45,7 @@ body {
   margin-bottom: 20px;
   font-size: 16px;
   outline: none;
+  border: 1px solid var(--primary) !important;
 }
 .customerWrapper {
   display: flex;
@@ -46,20 +60,41 @@ body {
   align-items: center;
   height: 80vh;
 }
-
-.StripeElement {
-  margin: 15px auto;
-  padding: 10px 12px;
-  color: #32325d;
-  background-color: white;
-  border: 1px solid transparent;
-  border-radius: 4px;
+.btn-primary {
+  background-color: var(--primary) !important;
+  border: 1px solid var(--primary) !important;
+  color: var(--white) !important;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
-
-.StripeElement--webkit-autofill {
-  background-color: #fefde5 !important;
+.btn-primary:hover {
+  background-color: var(--white) !important;
+  color: var(--primary) !important;
 }
-
+.text-primary {
+  color: var(--primary) !important;
+}
+.nav__login__btns {
+  display: flex !important;
+  margin-left: auto !important;
+}
+.btn-secondary {
+  background-color: var(--white) !important;
+  border: 1px solid var(--primary) !important;
+  color: var(--primary) !important;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
 @media (max-width: 600px) {
   .form-control {
     width: 100%;
