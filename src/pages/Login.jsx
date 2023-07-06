@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import { loginAction, reset } from '../features/auth/authSlice'
 import Loader from '../components/Loader'
 import Layout from './Layout'
-import Logo from '../assets/img/logo.png'
+import Logo from '../assets/img/updatedlogo.png'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -60,8 +60,13 @@ const Login = () => {
     <>
       <Layout title="Login">
         {isLoading && <Loader />}
-        <div className="d-flex justify-content-center login__img">
-          <img src={Logo} alt="logo" className="img-fluid mt-5" />
+        <div className="d-flex justify-content-center">
+          <img
+            src={Logo}
+            alt="logo"
+            className="img-fluid mt-5"
+            style={{ width: '200px', cursor: 'pointer' }}
+          />
         </div>
         <section className="container loginWrapper">
           <form onSubmit={onSubmit}>

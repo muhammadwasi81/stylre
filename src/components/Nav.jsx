@@ -3,6 +3,7 @@ import { navRoutes } from '../utils/routes'
 import { Link, useNavigate } from 'react-router-dom'
 import { FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa'
 import { logoutAction, reset } from '../features/auth/authSlice'
+import Logo from '../assets/img/updatedlogo.png'
 
 const Nav = () => {
   const { user } = useSelector((state) => state.auth)
@@ -17,11 +18,11 @@ const Nav = () => {
   }
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container-fluid">
+    <nav className="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+      <div className="container">
         <Link to="/">
           <img
-            src={'http://stylere.co/img/logo_2x.png'}
+            src={Logo}
             alt="logo"
             className="img-fluid"
             style={{ width: '100px' }}
