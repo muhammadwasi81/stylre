@@ -38,3 +38,19 @@ export const runFireworks = () => {
     )
   }, 250)
 }
+
+export const dropAddress = [
+  {
+    id: 1,
+    title: 'dropOff Address',
+    address: ' Memorial Hermann-Texas Medical Center Houston, TX 77030',
+  },
+]
+
+export const pickUpAddress = [
+  {
+    id: 1,
+    title: 'pickupAddress',
+    address: '5085 Westheimer Rd, Houston, TX 77056',
+  },
+]

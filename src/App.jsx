@@ -9,6 +9,7 @@ import CustomerInfo from './pages/CustomerInfo'
 import PaymentInfo from './pages/PaymentInfo'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
+import ProductInfo from './pages/ProductInfo'
 const stripePromise = loadStripe(
   'pk_test_51MihFAKHS9EGHah4Zu1HV4k83qBovFz6HjJM1ACkqiLZstcTWfSisDTUZqGIbVDQJhqzrcioz1qpP4vlKehecqG900Xxexg2nu'
 )
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/Info" element={<CustomerInfo />} />
+          <Route path="/Address" element={<ProductInfo />} />
           <Route
             path="/Payment"
             element={

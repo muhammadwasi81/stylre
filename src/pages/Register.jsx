@@ -36,14 +36,7 @@ const Register = () => {
     dispatch(reset())
   }, [dispatch, isSuccess, message, user, isLoading])
 
-  const requiredFields = [
-    userName,
-    email,
-    phoneNumber,
-    password,
-    confirmPassword,
-    isChecked,
-  ]
+  const requiredFields = [userName, email, phoneNumber, password, isChecked]
 
   const handleChange = (e) => {
     setFormData((prevState) => ({
@@ -53,7 +46,7 @@ const Register = () => {
   }
   const onSubmit = (e) => {
     e.preventDefault()
-    if (requiredFields.some((field) => field === '')) {
+    if (requiredFields.includes('')) {
       return toast.error('Please fill all the fields')
     }
     if (password !== confirmPassword) {
@@ -66,6 +59,7 @@ const Register = () => {
         'Please enter a valid phone number in the format 111-123-4567'
       )
     }
+
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])/
     if (!password.match(passwordRegex)) {
       return toast.error(
@@ -78,7 +72,9 @@ const Register = () => {
       email,
       phoneNumber,
       password,
+      isChecked,
     }
+    console.log(userData)
     dispatch(registerAction(userData))
     isSuccess &&
       setFormData({
