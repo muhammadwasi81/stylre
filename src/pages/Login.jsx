@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { loginAction, reset } from '../features/auth/authSlice'
 import Loader from '../components/Loader'
@@ -8,7 +8,6 @@ import Layout from './Layout'
 import Logo from '../assets/img/updatedlogo.png'
 
 const Login = () => {
-  const navigate = useNavigate()
   const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     email: '',
@@ -24,14 +23,12 @@ const Login = () => {
       toast.error(message)
     }
     if (isSuccess || user) {
-      toast.success('User logged in successfully')
-      // navigate('/')
       window.location.href = '/'
     }
     return () => {
       dispatch(reset())
     }
-  }, [isError, isSuccess, message, user, navigate, dispatch])
+  }, [isError, isSuccess, message, user, dispatch])
 
   const handleChange = (e) => {
     setFormData((prevState) => ({
