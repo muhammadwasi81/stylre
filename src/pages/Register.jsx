@@ -53,19 +53,19 @@ const Register = () => {
       return toast.error('Password and confirm password does not match')
     }
 
-    const phoneRegex = /^\d{3}-\d{3}-\d{4}$/
-    if (!phoneNumber.match(phoneRegex)) {
-      return toast.error(
-        'Please enter a valid phone number in the format 111-123-4567'
-      )
-    }
+    // const phoneRegex = /^\d{3}-\d{3}-\d{4}$/
+    // if (!phoneNumber.match(phoneRegex)) {
+    //   return toast.error(
+    //     'Please enter a valid phone number in the format 111-123-4567'
+    //   )
+    // }
 
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])/
-    if (!password.match(passwordRegex)) {
-      return toast.error(
-        'Password must include at least one uppercase and one lowercase letter'
-      )
-    }
+    // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])/
+    // if (!password.match(passwordRegex)) {
+    //   return toast.error(
+    //     'Password must include at least one uppercase and one lowercase letter'
+    //   )
+    // }
 
     const userData = {
       userName,
