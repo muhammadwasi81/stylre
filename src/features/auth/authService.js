@@ -1,9 +1,12 @@
 import axios from 'axios'
 
-const API_URL = '/api/users/'
-console.log(`${API_URL}signup`, 'API_URL')
+const apiGlobal = axios.create({
+  // baseURL: 'http://localhost:8000/api/users/',
+  baseURL: 'https://stylre-app.onrender.com/api/users',
+})
+
 const registerService = async (userData) => {
-  const response = await axios.post(`${API_URL}signup`, userData)
+  const response = await apiGlobal.post(`/signup`, userData)
   console.log(response.data, 'response.data')
   if (response.data) {
     localStorage.setItem('user', JSON.stringify(response.data))
@@ -12,7 +15,7 @@ const registerService = async (userData) => {
 }
 
 const loginService = async (userData) => {
-  const response = await axios.post(`${API_URL}login`, userData)
+  const response = await apiGlobal.post(`/login`, userData)
   console.log(response.data, 'response.data')
   if (response.data) {
     localStorage.setItem('user', JSON.stringify(response.data))

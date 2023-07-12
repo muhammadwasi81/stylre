@@ -1,10 +1,13 @@
 import axios from 'axios'
 
-const API_URL = '/api/products/'
+const apiGlobal = axios.create({
+  // baseURL: 'http://localhost:8000/api/products/',
+  baseURL: 'https://stylre-app.onrender.com/api/products',
+})
 
 const createProductService = async (payload) => {
   try {
-    const response = await axios.post(`${API_URL}create_product`, payload)
+    const response = await apiGlobal.post(`/create_product`, payload)
     console.log(response.data, 'createDeliveryService')
     return response.data
   } catch (error) {
