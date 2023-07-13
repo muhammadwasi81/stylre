@@ -1,13 +1,13 @@
 import axios from 'axios'
 
 const apiGlobal = axios.create({
-  // baseURL: 'http://localhost:8000/api/payments/',
-  baseURL: 'https://stylre-app.onrender.com/api/payments',
+  baseURL: 'http://localhost:8000/api/payments/',
+  // baseURL: 'https://stylre-app.onrender.com/api/payments',
 })
 
-const createPaymentService = async (paymentData) => {
+const createPaymentService = async (payload) => {
   try {
-    const response = await apiGlobal.post(`/create_payment`, paymentData)
+    const response = await apiGlobal.post(`/create_payment`, payload)
     console.log(response.data, 'createPaymentService')
     return response.data
   } catch (error) {

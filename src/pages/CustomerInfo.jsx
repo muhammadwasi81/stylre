@@ -190,15 +190,14 @@ const CustomerInfo = () => {
               onChange={handleChange}
             />
           </div>
-          <div className="form-group">
+          <div>
             <textarea
-              className="form-control"
+              className="text-area"
               id="pickupReferenceTag"
               name="pickupReferenceTag"
               value={pickupReferenceTag}
               placeholder="Enter reference tag"
               onChange={handleChange}
-              rows={3}
             />
           </div>
           <button type="submit" className="btn btn-primary w-100 mb-5">

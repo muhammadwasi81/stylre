@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { reset } from '../features/auth/authSlice'
 import Layout from './Layout'
-import { toast } from 'react-toastify'
 
 const Dashboard = () => {
   const navigate = useNavigate()
@@ -13,7 +12,6 @@ const Dashboard = () => {
     if (!user) {
       navigate('/login')
     } else {
-      toast.success('User Login Successful')
       navigate('/dashboard')
     }
     return () => {

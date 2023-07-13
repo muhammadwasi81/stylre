@@ -40,12 +40,12 @@ const Nav = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ml-auto mb-2 mb-lg-0 nav__login__btns">
+          <ul className="navbar-nav ml-auto mb-2 mb-lg-0 nav__login__btns ">
             {user ? (
               <>
                 {navRoutes.map((route) => (
                   <li className="nav-item" key={route.id}>
-                    <Link className="nav-link" to={route.path}>
+                    <Link className="nav-link text-black" to={route.path}>
                       {route.name}
                     </Link>
                   </li>
