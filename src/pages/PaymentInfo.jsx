@@ -4,7 +4,7 @@ import Layout from './Layout'
 import { createPaymentAction, reset } from '../features/payment/paymentSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
-import { runFireworks } from '../utils'
+import { runFireworks } from '../utils/runFireworks'
 
 const PaymentInfo = () => {
   const dispatch = useDispatch()

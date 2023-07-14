@@ -1,51 +1,8 @@
-import confetti from 'canvas-confetti'
-
 export const UUID = () => {
   const head = Date.now().toString(36)
   const tail = Math.random().toString(36).substr(2)
   return head + tail
 }
-
-export const runFireworks = () => {
-  var duration = 5 * 1000
-  var animationEnd = Date.now() + duration
-  var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 }
-
-  function randomInRange(min, max) {
-    return Math.random() * (max - min) + min
-  }
-
-  var interval = setInterval(function () {
-    var timeLeft = animationEnd - Date.now()
-
-    if (timeLeft <= 0) {
-      return clearInterval(interval)
-    }
-
-    var particleCount = 50 * (timeLeft / duration)
-    // since particles fall down, start a bit higher than random
-    confetti(
-      Object.assign({}, defaults, {
-        particleCount,
-        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-      })
-    )
-    confetti(
-      Object.assign({}, defaults, {
-        particleCount,
-        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-      })
-    )
-  }, 250)
-}
-
-export const dropAddress = [
-  {
-    id: 1,
-    title: 'dropOff Address',
-    address: ' Memorial Hermann-Texas Medical Center Houston, TX 77030',
-  },
-]
 
 export const pickUpAddress = [
   {
@@ -79,4 +36,15 @@ export const productsData = [
   { id: 21, name: 'Suitcase' },
   { id: 22, name: 'Luggage' },
   { id: 23, name: 'Other' },
+]
+
+export const businessStores = [
+  { id: 1, name: '4520 S Orange Blossom Trl Orlando, FL 32839' },
+  { id: 2, name: '7901 South Orange Blossom Trail Orlando, FL 32809' },
+  { id: 3, name: '2745 N Hiawassee Rd Orlando, FL 32818' },
+  { id: 4, name: '451 East Altamonte Drive Altamonte Springs, FL 32701' },
+  { id: 5, name: '12381 S. Orange Blossom Trail Orlando, FL 32837' },
+  { id: 6, name: '355 N Alafaya Trail Orlando (Waterford Lakes), FL 32828' },
+  { id: 7, name: '755 S Orange Blossom Trl Apopka, FL 32703' },
+  { id: 8, name: '2759 E Broson Memorial Hwy Space 3 Kissimmee, FL 34744' },
 ]

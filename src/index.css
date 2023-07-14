@@ -82,6 +82,7 @@ body {
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  user-select: none;
 }
 .btn-primary:hover {
   background-color: var(--white) !important;
@@ -105,6 +106,7 @@ body {
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  user-select: none;
 }
 img {
   image-rendering: pixelated !important;

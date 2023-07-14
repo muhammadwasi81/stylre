@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import Layout from './Layout'
 import { toast } from 'react-toastify'
-import { UUID, dropAddress, pickUpAddress } from '../utils'
+import { UUID, businessStores, pickUpAddress } from '../utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { createDeliveryAction, reset } from '../features/delivery/deliverySlice'
 import Loader from '../components/Loader'
 
-const CustomerInfo = () => {
+const DeliveryInfo = () => {
   const dispatch = useDispatch()
   const { deliveries, isError, isLoading, message, isSuccess } = useSelector(
     (state) => state.delivery
@@ -21,7 +21,7 @@ const CustomerInfo = () => {
     dropOffBusinessName: '',
     dropOffPhoneNumber: '',
     orderValue: '',
-    tip: '',
+    // tip: '',
   })
 
   const {
@@ -32,7 +32,7 @@ const CustomerInfo = () => {
     dropOffBusinessName,
     dropOffPhoneNumber,
     orderValue,
-    tip,
+    // tip,
   } = formData
 
   useEffect(() => {
@@ -68,8 +68,8 @@ const CustomerInfo = () => {
     dropOffAddress,
     dropOffBusinessName,
     dropOffPhoneNumber,
-    // orderValue,
-    tip,
+    orderValue,
+    // tip,
   ]
   const onSubmit = (e) => {
     e.preventDefault()
@@ -85,7 +85,7 @@ const CustomerInfo = () => {
       dropoff_business_name: dropOffBusinessName,
       dropoff_phone_number: dropOffPhoneNumber,
       order_value: 200,
-      tip: tip,
+      // tip: tip,
     }
     console.log(deliveryData, 'payloadData')
     dispatch(createDeliveryAction(deliveryData))
@@ -105,8 +105,7 @@ const CustomerInfo = () => {
   return (
     <Layout title="Customer Info">
       <section className="container customerWrapper">
-        {isLoading && <Loader />}
-        <h1>Customer Info</h1>
+        <h1 className="fw-bold">Delivery Info</h1>
         <form onSubmit={onSubmit}>
           <div className="form-group">
             <select
@@ -128,46 +127,47 @@ const CustomerInfo = () => {
             </select>
           </div>
           <div className="form-group">
-            <input
-              type="number"
-              className="form-control"
-              id="pickupPhoneNumber"
-              name="pickupPhoneNumber"
-              value={pickupPhoneNumber}
-              placeholder="Enter your pickup phone number"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-group">
             <select
               className="form-control"
               id="dropOffAddress"
               name="dropOffAddress"
               value={dropOffAddress}
-              placeholder="Enter your drop off address"
+              placeholder="Select Pickup Business Store"
               onChange={handleChange}
             >
-              <option value="Select Drop Off Address">
-                Select Drop Off Address
+              <option value="    Select Pickup Business Store">
+                Select Pickup Business Store
               </option>
-              {dropAddress.map((address) => (
-                <option key={address.id} value={address.address}>
-                  {address.address}
+              {businessStores.map((store) => (
+                <option key={store.id} value={store.name}>
+                  {store.name}
                 </option>
               ))}
             </select>
           </div>
           <div className="form-group">
             <input
-              type="text"
+              type="number"
               className="form-control"
-              id="dropOffBusinessName"
-              name="dropOffBusinessName"
-              value={dropOffBusinessName}
-              placeholder="Enter your pickup business name"
+              id="pickupPhoneNumber"
+              name="pickupPhoneNumber"
+              value={pickupPhoneNumber}
+              placeholder="Enter customer number"
               onChange={handleChange}
             />
           </div>
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control"
+              id="dropOffAddress"
+              name="dropOffAddress"
+              value={dropOffAddress}
+              placeholder="Enter your drop off address"
+              onChange={handleChange}
+            />
+          </div>
+
           <div className="form-group">
             <input
               type="number"
@@ -179,29 +179,18 @@ const CustomerInfo = () => {
               onChange={handleChange}
             />
           </div>
-          <div className="form-group">
-            <input
-              type="text"
-              className="form-control"
-              id="tip"
-              name="tip"
-              value={tip}
-              placeholder="Enter your tip"
-              onChange={handleChange}
-            />
-          </div>
-          <div>
+          <div className="">
             <textarea
               className="text-area"
               id="pickupReferenceTag"
               name="pickupReferenceTag"
               value={pickupReferenceTag}
-              placeholder="Enter reference tag"
+              placeholder="Enter Order Details"
               onChange={handleChange}
             />
           </div>
           <button type="submit" className="btn btn-primary w-100 mb-5">
-            {isLoading ? 'Loading...' : 'Create Delivery'}
+            {isLoading ? <Loader /> : 'Create Delivery'}
           </button>
         </form>
       </section>
@@ -209,4 +198,4 @@ const CustomerInfo = () => {
   )
 }
 
-export default CustomerInfo
+export default DeliveryInfo
