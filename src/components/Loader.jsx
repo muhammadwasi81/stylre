@@ -5,14 +5,10 @@ const Loader = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '100vh',
+        height: '80vh',
       }}
     >
-      <div
-        className="spinner-border text-warning"
-        role="status"
-        style={{ width: '3rem', height: '3rem' }}
-      >
+      <div className="spinner-border text-warning" role="status">
         <span className="visually-hidden">Loading...</span>
       </div>
     </div>

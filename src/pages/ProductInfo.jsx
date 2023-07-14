@@ -4,11 +4,14 @@ import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import { createProductAction } from '../features/product/productSlice'
 import { reset } from '../features/payment/paymentSlice'
-import imageCompression from 'browser-image-compression'
-import { productsData } from '../utils'
 import Loader from '../components/Loader'
+import Modal from 'react-modal'
+import { AiOutlineClose } from 'react-icons/ai'
+import { barCodeInfo } from '../constants'
 
+Modal.setAppElement('#root')
 const ProductInfo = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(false)
   const dispatch = useDispatch()
   const { isError, isLoading, message, isSuccess } = useSelector(
     (state) => state.product
@@ -16,11 +19,9 @@ const ProductInfo = () => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
-    quantity: '',
-    products: '',
     image: '',
   })
-  const { firstName, lastName, quantity, products, image } = formData
+  const { firstName, lastName, image } = formData
 
   const handleChange = (e) => {
     setFormData((prevState) => ({
@@ -41,8 +42,6 @@ const ProductInfo = () => {
       setFormData({
         firstName: '',
         lastName: '',
-        quantity: '',
-        products: '',
         image: '',
       })
     }
@@ -51,15 +50,13 @@ const ProductInfo = () => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    const formFields = [firstName, lastName, quantity, products, image]
+    const formFields = [firstName, lastName, image]
     if (formFields.includes('')) {
       return toast.error('Please fill all the fields')
     }
     const formData = new FormData()
     formData.append('firstName', firstName)
     formData.append('lastName', lastName)
-    formData.append('quantity', quantity)
-    formData.append('products', products)
     formData.append('image', image)
     dispatch(createProductAction(formData))
   }
@@ -98,58 +95,59 @@ const ProductInfo = () => {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="image" className="form-label fw-bolder">
-              Choose image
+            <span className="form-label fw-bolder">Image</span>
+            <label
+              id="file-input-label"
+              for="file-input"
+              className="file-input-label"
+            >
+              Upload QR code
             </label>
             <input
               type="file"
               className="form-control"
               accept="image/*"
-              id="image"
-              name="image"
+              id="file-input"
+              name="file-input"
               onChange={handleImageUpload}
             />
-          </div>
-          <div className="form-group">
-            <label htmlFor="quantity" className="form-label fw-bolder">
-              Quantity
-            </label>
-            <select
-              className="form-control"
-              id="quantity"
-              name="quantity"
-              value={quantity}
-              onChange={handleChange}
+            <button
+              type="button"
+              className="btn btn-primary mb-3"
+              onClick={() => setModalIsOpen(true)}
             >
-              <option value="">Select quantity</option>
-              {[...Array(10).keys()].map((num) => (
-                <option key={num} value={num + 1}>
-                  {num + 1}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="form-group">
-            <label htmlFor="products" className="form-label fw-bolder">
-              Product
-            </label>
-            <select
-              className="form-control"
-              id="products"
-              name="products"
-              value={products}
-              onChange={handleChange}
+              ?
+            </button>
+            <Modal
+              isOpen={modalIsOpen}
+              onRequestClose={() => setModalIsOpen(false)}
+              contentLabel="Help Modal"
+              style={{
+                content: {
+                  top: '50%',
+                  left: '50%',
+                  right: 'auto',
+                  bottom: 'auto',
+                  marginRight: '-50%',
+                  transform: 'translate(-50%, -50%)',
+                  width: '500px',
+                  height: '300px',
+                  position: 'relative',
+                },
+                overlay: { zIndex: 1000 },
+              }}
             >
-              <option value="">Select an item</option>
-              {productsData.map((product) => (
-                <option key={product.id} value={product.id}>
-                  {product.name}
-                </option>
-              ))}
-            </select>
+              <button
+                onClick={() => setModalIsOpen(false)}
+                className="modal-close-btn"
+              >
+                <AiOutlineClose size={20} className="text-primary" />
+              </button>
+              <p>{barCodeInfo.info}</p>
+            </Modal>
           </div>
           <button type="submit" className="btn btn-primary w-100 mb-5">
-            {isLoading ? <Loader /> : 'Create Product'}
+            {isLoading ? 'Loading...' : 'Create Product'}
           </button>
         </form>
       </section>

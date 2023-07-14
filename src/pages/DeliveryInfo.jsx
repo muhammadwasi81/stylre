@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Layout from './Layout'
 import { toast } from 'react-toastify'
-import { UUID, businessStores, pickUpAddress } from '../utils'
+import { UUID, businessStores, pickUpAddress, storesData } from '../utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { createDeliveryAction, reset } from '../features/delivery/deliverySlice'
 import Loader from '../components/Loader'
@@ -102,12 +102,20 @@ const DeliveryInfo = () => {
       })
   }
   // order value will be calculated by location
+  const getStorePhoneNumber = (storeName) => {
+    console.log(storeName, 'storeName')
+    const store = storesData.find((store) => store.name === storeName)
+    return store ? store.phone : ''
+  }
   return (
     <Layout title="Customer Info">
       <section className="container customerWrapper">
         <h1 className="fw-bold">Delivery Info</h1>
         <form onSubmit={onSubmit}>
           <div className="form-group">
+            <label htmlFor="storePhoneNumber" className="form-label fw-bolder">
+              Pickup Address
+            </label>
             <select
               className="form-control"
               id="pickupAddress"
@@ -127,6 +135,9 @@ const DeliveryInfo = () => {
             </select>
           </div>
           <div className="form-group">
+            <label htmlFor="storePhoneNumber" className="form-label fw-bolder">
+              Drop Off Address
+            </label>
             <select
               className="form-control"
               id="dropOffAddress"
@@ -135,9 +146,7 @@ const DeliveryInfo = () => {
               placeholder="Select Pickup Business Store"
               onChange={handleChange}
             >
-              <option value="    Select Pickup Business Store">
-                Select Pickup Business Store
-              </option>
+              <option value="">Select Pickup Business Store</option>
               {businessStores.map((store) => (
                 <option key={store.id} value={store.name}>
                   {store.name}
@@ -146,6 +155,9 @@ const DeliveryInfo = () => {
             </select>
           </div>
           <div className="form-group">
+            <label htmlFor="storePhoneNumber" className="form-label fw-bolder">
+              Customer Number
+            </label>
             <input
               type="number"
               className="form-control"
@@ -156,19 +168,28 @@ const DeliveryInfo = () => {
               onChange={handleChange}
             />
           </div>
+          {dropOffAddress && (
+            <div className="form-group">
+              <label
+                htmlFor="storePhoneNumber"
+                className="form-label fw-bolder"
+              >
+                Store Phone Number
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="storePhoneNumber"
+                name="storePhoneNumber"
+                value={getStorePhoneNumber(dropOffAddress)}
+                disabled
+              />
+            </div>
+          )}
           <div className="form-group">
-            <input
-              type="text"
-              className="form-control"
-              id="dropOffAddress"
-              name="dropOffAddress"
-              value={dropOffAddress}
-              placeholder="Enter your drop off address"
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className="form-group">
+            <label htmlFor="storePhoneNumber" className="form-label fw-bolder">
+              Drop Off Number
+            </label>
             <input
               type="number"
               className="form-control"
@@ -179,6 +200,9 @@ const DeliveryInfo = () => {
               onChange={handleChange}
             />
           </div>
+          <label htmlFor="storePhoneNumber" className="form-label fw-bolder">
+            Order Details
+          </label>
           <div className="">
             <textarea
               className="text-area"
@@ -190,7 +214,7 @@ const DeliveryInfo = () => {
             />
           </div>
           <button type="submit" className="btn btn-primary w-100 mb-5">
-            {isLoading ? <Loader /> : 'Create Delivery'}
+            {isLoading ? 'Loading...' : 'Create Delivery'}
           </button>
         </form>
       </section>

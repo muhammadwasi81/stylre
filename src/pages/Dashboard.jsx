@@ -27,11 +27,13 @@ const Dashboard = () => {
             <div className="">
               <h1 className="text-black fw-bolder fs-1">
                 Welcome to the world's most <br />{' '}
-                <span className="text-primary">imaginative</span> marketplace
+                <span className="text-primary">convenient</span> in store pick
+                up options.
               </h1>
               <p className="pt-2">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Nostrum, corporis perferendis explicabo animi magnam,
+                Discover a whole new level of convenience with our exceptional
+                same day delivery in-store pickup, designed to make your
+                shopping experience as effortless as possible.
               </p>
               <button
                 className="btn btn-primary w-100 mt-3"
