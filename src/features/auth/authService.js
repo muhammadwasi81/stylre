@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 const apiGlobal = axios.create({
-  baseURL: 'http://localhost:8000/api/users',
-  // baseURL: 'https://stylre-app.onrender.com/api/users',
+  // baseURL: 'http://localhost:8000/api/users',
+  baseURL: 'https://stylre-app.onrender.com/api/users',
 })
 
 const registerService = async (userData) => {
