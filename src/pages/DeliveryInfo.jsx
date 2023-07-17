@@ -4,7 +4,6 @@ import { toast } from 'react-toastify'
 import { UUID, businessStores, pickUpAddress, storesData } from '../utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { createDeliveryAction, reset } from '../features/delivery/deliverySlice'
-import Loader from '../components/Loader'
 
 const DeliveryInfo = () => {
   const dispatch = useDispatch()
@@ -154,6 +153,24 @@ const DeliveryInfo = () => {
               ))}
             </select>
           </div>
+          {dropOffAddress && (
+            <div className="form-group">
+              <label
+                htmlFor="storePhoneNumber"
+                className="form-label fw-bolder"
+              >
+                Store Phone Number
+              </label>
+              <input
+                type="text"
+                className="form-control bg-transparent"
+                id="storePhoneNumber"
+                name="storePhoneNumber"
+                value={getStorePhoneNumber(dropOffAddress)}
+                disabled
+              />
+            </div>
+          )}
           <div className="form-group">
             <label htmlFor="storePhoneNumber" className="form-label fw-bolder">
               Customer Number
@@ -168,24 +185,7 @@ const DeliveryInfo = () => {
               onChange={handleChange}
             />
           </div>
-          {dropOffAddress && (
-            <div className="form-group">
-              <label
-                htmlFor="storePhoneNumber"
-                className="form-label fw-bolder"
-              >
-                Store Phone Number
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="storePhoneNumber"
-                name="storePhoneNumber"
-                value={getStorePhoneNumber(dropOffAddress)}
-                disabled
-              />
-            </div>
-          )}
+
           <div className="form-group">
             <label htmlFor="storePhoneNumber" className="form-label fw-bolder">
               Drop Off Number

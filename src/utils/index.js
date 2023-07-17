@@ -38,18 +38,6 @@ export const productsData = [
   { id: 23, name: 'Other' },
 ]
 
-export const businessStores = [
-  { id: 1, name: '4520 S Orange Blossom Trl Orlando, FL 32839' },
-  { id: 2, name: '7901 South Orange Blossom Trail Orlando, FL 32809' },
-  { id: 3, name: '2745 N Hiawassee Rd Orlando, FL 32818' },
-  { id: 4, name: '451 East Altamonte Drive Altamonte Springs, FL 32701' },
-  { id: 5, name: '12381 S. Orange Blossom Trail Orlando, FL 32837' },
-  { id: 6, name: '355 N Alafaya Trail Orlando (Waterford Lakes), FL 32828' },
-  { id: 7, name: '755 S Orange Blossom Trl Apopka, FL 32703' },
-  { id: 8, name: '2759 E Broson Memorial Hwy Space 3 Kissimmee, FL 34744' },
-  { id: 9, name: 'A|X Armani Exchange' },
-]
-
 export const storesData = [
   {
     id: 1,
@@ -101,10 +89,7 @@ export const storesData = [
     name: 'AllSaints',
     phone: '(713) 481-0066',
   },
-  {
-    name: 'American Eagle Outfitters',
-    phone: '(713) 622-6057',
-  },
+
   {
     id: 11,
     name: 'Ann Taylor',
@@ -489,4 +474,14 @@ export const storesData = [
     name: 'Saint Laurent',
     phone: '(713) 840-7006',
   },
+  {
+    id: 87,
+    name: 'American Eagle Outfitters',
+    phone: '(713) 622-6057',
+  },
 ]
+
+export const businessStores = [
+  ...storesData.map((store) => ({ id: store.id, name: store.name })),
+]
+console.log(businessStores, 'businessStores')

@@ -6,6 +6,7 @@ const user = JSON.parse(localStorage.getItem('user'))
 
 const initialState = {
   user: user ? user : null,
+  userDetail: null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -52,6 +53,27 @@ export const loginAction = createAsyncThunk(
   }
 )
 
+export const getUserByIdAction = createAsyncThunk(
+  'auth/getUserById',
+  async (id, thunkAPI) => {
+    console.log(thunkAPI.getState(), 'dsdsd')
+    try {
+      const token = thunkAPI.getState().auth.user.data.token
+      console.log(token, 'token in action')
+      const response = await authService.getUserById(id, token)
+      console.log(response.data, 'getUserByIdAction')
+      return response.data
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
 export const logoutAction = createAsyncThunk('auth/logout', async () => {
   await authService.logoutService()
 })
@@ -102,6 +124,23 @@ export const authSlice = createSlice({
         state.isError = true
         state.message = action.payload
         state.user = null
+      })
+      .addCase(getUserByIdAction.pending, (state) => {
+        console.log('pending')
+        state.isLoading = true
+      })
+      .addCase(getUserByIdAction.fulfilled, (state, action) => {
+        console.log(action.payload.data, 'fulfilled')
+        state.isLoading = false
+        state.isSuccess = true
+        state.userDetail = action.payload
+      })
+      .addCase(getUserByIdAction.rejected, (state, action) => {
+        console.log('rejected', action.payload)
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+        state.userDetail = null
       })
       .addCase(logoutAction.fulfilled, (state) => {
         state.user = null

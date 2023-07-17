@@ -11,9 +11,10 @@ const Dashboard = () => {
   const { user } = useSelector((state) => state.auth)
   useEffect(() => {
     if (!user) {
-      navigate('/login')
+      window.location.href = '/login'
     } else {
       navigate('/')
+      toast.success('Login Successfully')
     }
     dispatch(reset())
   }, [])
@@ -43,7 +44,7 @@ const Dashboard = () => {
               </button>
             </div>
           </div>
-          <div className="col-sm-6 position-relative d-none d-md-block">
+          <div className="col-sm-6 position-relative d-none d-lg-block">
             <img
               src="https://www.pngitem.com/pimgs/m/522-5229044_e-commerce-store-png-transparent-png.png"
               alt="product-img"

@@ -4,12 +4,10 @@ import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import { createProductAction } from '../features/product/productSlice'
 import { reset } from '../features/payment/paymentSlice'
-import Loader from '../components/Loader'
-import Modal from 'react-modal'
-import { AiOutlineClose } from 'react-icons/ai'
 import { barCodeInfo } from '../constants'
+import ResponsiveModal from 'react-responsive-modal'
+import 'react-responsive-modal/styles.css'
 
-Modal.setAppElement('#root')
 const ProductInfo = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const dispatch = useDispatch()
@@ -94,11 +92,11 @@ const ProductInfo = () => {
               onChange={handleChange}
             />
           </div>
-          <div className="form-group">
-            <span className="form-label fw-bolder">Image</span>
+          <span className="form-label fw-bolder">Image</span>
+          <div className="form-group d-flex gap-3">
             <label
               id="file-input-label"
-              for="file-input"
+              htmlFor="file-input"
               className="file-input-label"
             >
               Upload QR code
@@ -113,39 +111,30 @@ const ProductInfo = () => {
             />
             <button
               type="button"
-              className="btn btn-primary mb-3"
+              className="btn btn-primary mt-2"
+              style={{ width: '40px', height: '45px' }}
               onClick={() => setModalIsOpen(true)}
             >
-              ?
+              <span style={{ marginLeft: '-2.5px' }}>?</span>
             </button>
-            <Modal
-              isOpen={modalIsOpen}
-              onRequestClose={() => setModalIsOpen(false)}
-              contentLabel="Help Modal"
-              style={{
-                content: {
-                  top: '50%',
-                  left: '50%',
-                  right: 'auto',
-                  bottom: 'auto',
-                  marginRight: '-50%',
-                  transform: 'translate(-50%, -50%)',
-                  width: '500px',
-                  height: '300px',
-                  position: 'relative',
-                },
-                overlay: { zIndex: 1000 },
-              }}
-            >
-              <button
-                onClick={() => setModalIsOpen(false)}
-                className="modal-close-btn"
-              >
-                <AiOutlineClose size={20} className="text-primary" />
-              </button>
-              <p>{barCodeInfo.info}</p>
-            </Modal>
           </div>
+          <ResponsiveModal
+            open={modalIsOpen}
+            onClose={() => setModalIsOpen(false)}
+            center
+            classNames={{
+              modal: 'custom-modal',
+              overlay: 'custom-overlay',
+            }}
+            styles={{
+              modal: {
+                padding: '20px',
+                borderRadius: '10px',
+              },
+            }}
+          >
+            <p className="fw-lighter">{barCodeInfo.info}</p>
+          </ResponsiveModal>
           <button type="submit" className="btn btn-primary w-100 mb-5">
             {isLoading ? 'Loading...' : 'Create Product'}
           </button>
