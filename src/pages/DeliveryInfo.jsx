@@ -108,7 +108,7 @@ const DeliveryInfo = () => {
   }
   return (
     <Layout title="Customer Info">
-      <section className="container customerWrapper">
+      <section className="container">
         <h1 className="fw-bold">Delivery Info</h1>
         <form onSubmit={onSubmit}>
           <div className="form-group">

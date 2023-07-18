@@ -151,18 +151,12 @@ const PaymentInfo = () => {
             </p>
           </div>
         </div>
-        <div
-          className="mb-3 w-50"
-          style={{
-            margin: '0 auto',
-            maxWidth: '500px',
-          }}
-        >
+        <div className="mb-3 w-50 card-wrapper">
           <label className="form-label fw-bolder">Card Details</label>
           <CardElement
             value={cardDetails}
             onChange={(event) => setCardDetails(event.complete ? event : '')}
-            className="card"
+            className="stripe-card"
             options={{
               style: {
                 base: {
