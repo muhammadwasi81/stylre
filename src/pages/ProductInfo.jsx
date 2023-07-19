@@ -60,9 +60,9 @@ const ProductInfo = () => {
   }
 
   return (
-    <Layout title="Product Info">
-      <section className="container customerWrapper">
-        <h1 className="fw-bold">Product Info</h1>
+    <Layout title="Customer Info">
+      <h1 className="fw-bold text-center mt-3">Customer Info</h1>
+      <section className="container d-flex justify-content-center">
         <form onSubmit={onSubmit}>
           <div className="form-group">
             <label htmlFor="firstName" className="form-label fw-bolder">
@@ -136,7 +136,7 @@ const ProductInfo = () => {
             <p className="fw-lighter">{barCodeInfo.info}</p>
           </ResponsiveModal>
           <button type="submit" className="btn btn-primary w-100 mb-5">
-            {isLoading ? 'Loading...' : 'Create Product'}
+            {isLoading ? 'Loading...' : 'Create Order'}
           </button>
         </form>
       </section>

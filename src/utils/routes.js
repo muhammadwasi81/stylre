@@ -7,7 +7,7 @@ const navRoutes = [
   {
     id: 5,
     path: '/Address',
-    name: 'Product Info',
+    name: 'Customer Info',
   },
   {
     id: 6,

@@ -43,7 +43,12 @@ const Dashboard = () => {
                   <span className="text-primary">convenient</span> in-store
                   pick-up options.
                 </Typography>
-                <Typography variant="p">
+                <Typography
+                  variant="p"
+                  sx={{
+                    fontSize: { xs: '.85rem', lg: '1rem' },
+                  }}
+                >
                   Discover a whole new level of convenience with our exceptional
                   same day delivery in-store pickup, designed to make your
                   shopping experience as effortless as possible.

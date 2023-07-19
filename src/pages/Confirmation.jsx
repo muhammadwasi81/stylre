@@ -1,18 +1,19 @@
 import { useSelector } from 'react-redux'
 import Layout from './Layout'
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io'
+import { Box } from '@mui/material'
 
 const Confirmation = () => {
   const { user } = useSelector((state) => state.auth)
   console.log(user, 'user')
   return (
     <Layout title="Confirmation">
-      <div
+      <Box
         className="container"
-        style={{
+        sx={{
           maxWidth: '600px',
           width: '100%',
-          marginTop: '5rem',
+          mt: { xs: '1.5rem', md: '2rem' },
           backgroundColor: '#fff',
           padding: '2rem',
           borderRadius: '10px',
@@ -38,7 +39,7 @@ const Confirmation = () => {
             </button>
           </div>
         </div>
-      </div>
+      </Box>
     </Layout>
   )
 }

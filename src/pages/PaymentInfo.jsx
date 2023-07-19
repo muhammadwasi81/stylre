@@ -6,7 +6,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { runFireworks } from '../utils/runFireworks'
 import { useParams } from 'react-router-dom'
-import { getUserByIdAction } from '../features/auth/authSlice'
+// import { getUserByIdAction } from '../features/auth/authSlice'
+import {
+  Card,
+  CardContent,
+  Typography,
+  TableContainer,
+  Table,
+  TableBody,
+  TableRow,
+  TableCell,
+} from '@mui/material'
 
 const PaymentInfo = () => {
   const { id } = useParams()
@@ -99,7 +109,10 @@ const PaymentInfo = () => {
   }
   return (
     <Layout title="Payment Information">
-      <form onSubmit={onSubmit} className="container paymentWrapper">
+      <form
+        onSubmit={onSubmit}
+        className="container d-flex justify-content-center flex-column align-items-center mt-3   mt-md-5"
+      >
         {/* <div className="mb-3">
           <label className="form-label fw-bolder">Email</label>
           <input
@@ -122,8 +135,7 @@ const PaymentInfo = () => {
             placeholder="Enter the amount you want to pay"
           />
         </div> */}
-        <div
-          className="card"
+        <Card
           style={{
             maxWidth: '500px',
             width: '100%',
@@ -134,23 +146,50 @@ const PaymentInfo = () => {
             marginBottom: '20px',
           }}
         >
-          <div className="card-body">
-            <h5 className="card-title">Fees Details</h5>
-            <p className="card-text">
-              <strong>Processing Fee:</strong> ${processingFee}
-            </p>
-            <p className="card-text">
-              <strong>Service Fee:</strong> ${serviceFee}
-            </p>
-            <p className="card-text">
-              <strong>DoorDash Fee:</strong> ${doorDashFee}
-            </p>
-            <p className="card-text">
-              <strong>Total Amount:</strong> $
-              {Number(amount) + processingFee + serviceFee + doorDashFee}
-            </p>
-          </div>
-        </div>
+          <CardContent>
+            <Typography variant="h5" component="h2">
+              Order Details
+            </Typography>
+            <TableContainer>
+              <Table>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>
+                      <strong>Processing Fee:</strong>
+                    </TableCell>
+                    <TableCell>${processingFee}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>
+                      <strong>Service Fee:</strong>
+                    </TableCell>
+                    <TableCell>${serviceFee}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>
+                      <strong>DoorDash Fee:</strong>
+                    </TableCell>
+                    <TableCell>${doorDashFee}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>
+                      <strong>Total Amount:</strong>
+                    </TableCell>
+                    <TableCell>
+                      <strong>
+                        $
+                        {Number(amount) +
+                          processingFee +
+                          serviceFee +
+                          doorDashFee}
+                      </strong>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </CardContent>
+        </Card>
         <div className="mb-3 w-50 card-wrapper">
           <label className="form-label fw-bolder">Card Details</label>
           <CardElement

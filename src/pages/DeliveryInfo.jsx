@@ -108,8 +108,8 @@ const DeliveryInfo = () => {
   }
   return (
     <Layout title="Customer Info">
-      <section className="container">
-        <h1 className="fw-bold">Delivery Info</h1>
+      <h1 className="fw-bold text-center">Delivery Info</h1>
+      <section className="container d-flex justify-content-center">
         <form onSubmit={onSubmit}>
           <div className="form-group">
             <label htmlFor="storePhoneNumber" className="form-label fw-bolder">
@@ -135,7 +135,7 @@ const DeliveryInfo = () => {
           </div>
           <div className="form-group">
             <label htmlFor="storePhoneNumber" className="form-label fw-bolder">
-              Drop Off Address
+              Business Name
             </label>
             <select
               className="form-control"
