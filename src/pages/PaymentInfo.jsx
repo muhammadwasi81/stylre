@@ -169,7 +169,7 @@ const PaymentInfo = () => {
                     <TableCell>
                       <strong>DoorDash Fee:</strong>
                     </TableCell>
-                    <TableCell>${doorDashFee}:00</TableCell>
+                    <TableCell>${doorDashFee.toFixed}.00</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell>
