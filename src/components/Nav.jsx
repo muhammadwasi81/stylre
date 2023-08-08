@@ -14,7 +14,7 @@ const Nav = () => {
   const onLogout = () => {
     dispatch(logoutAction())
     dispatch(reset())
-    navigate('/')
+    navigate('/Login')
   }
 
   return (
