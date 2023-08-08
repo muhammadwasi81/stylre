@@ -5,6 +5,14 @@ import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { registerAction, reset } from '../features/auth/authSlice'
 import Loader from '../components/Loader'
+import {
+  AiOutlineEye,
+  AiOutlineEyeInvisible,
+  AiOutlineMail,
+  AiFillLock,
+  AiOutlinePhone,
+  AiOutlineUserAdd,
+} from 'react-icons/ai'
 
 const Register = () => {
   const dispatch = useDispatch()
@@ -17,6 +25,8 @@ const Register = () => {
     phoneNumber: '',
     password: '',
     confirmPassword: '',
+    showPassword: false,
+    showConfirmPassword: false,
     isChecked: false,
   })
 
@@ -44,6 +54,21 @@ const Register = () => {
       [e.target.name]: e.target.value,
     }))
   }
+
+  const togglePassword = () => {
+    setFormData((prevState) => ({
+      ...prevState,
+      showPassword: !prevState.showPassword,
+    }))
+  }
+
+  const toggleConfirmPassword = () => {
+    setFormData((prevState) => ({
+      ...prevState,
+      showConfirmPassword: !prevState.showConfirmPassword,
+    }))
+  }
+
   const onSubmit = (e) => {
     e.preventDefault()
     if (requiredFields.includes('')) {
@@ -88,104 +113,157 @@ const Register = () => {
   return (
     <Layout title="Register">
       {isLoading && <Loader />}
-      <section className="container signupWrapper">
-        <form onSubmit={onSubmit}>
-          <h1 className="text-black fw-bolder">Create an Account</h1>
-          <p className="text-black fw-normal">
-            The faster you sign up, the faster you get the goods.
-          </p>
-          <div className="form-group">
-            <input
-              type="text"
-              className="form-control"
-              id="userName"
-              name="userName"
-              value={userName}
-              placeholder="Enter your name"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              name="email"
-              value={email}
-              placeholder="Enter your email"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="number"
-              className="form-control"
-              id="phoneNumber"
-              name="phoneNumber"
-              value={phoneNumber}
-              placeholder="111-123-1234"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type={'password'}
-              className="form-control"
-              id="password"
-              name="password"
-              value={password}
-              placeholder="Enter your password"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type={'password'}
-              className="form-control"
-              id="confirmPassword"
-              name="confirmPassword"
-              value={confirmPassword}
-              placeholder="Enter your confirm password"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              checked={isChecked}
-              onChange={(e) =>
-                setFormData({ ...formData, isChecked: !isChecked })
-              }
-              id="flexCheckDefault"
-            />
-            <label className="form-check-label" htmlFor="flexCheckDefault">
-              &nbsp;I agree to the{' '}
-              <Link to="/terms" className="text-decoration-none text-primary">
-                Terms of Service
-              </Link>{' '}
-              and{' '}
-              <Link to="/privacy" className="text-decoration-none text-primary">
-                Privacy Policy
+      <div className="signup-wrapper">
+        <section className="container signupWrapper">
+          <form onSubmit={onSubmit}>
+            <h1 className="text-black fw-bolder text-white">
+              Create an Account
+            </h1>
+            <p className="text-black fw-normal text-white">
+              The faster you sign up, the faster you get the goods.
+            </p>
+            <div className="form-group icon-input">
+              <label className="form-label fw-bolder text-white" htmlFor="name">
+                Name
+                <input
+                  type="text"
+                  className="form-control"
+                  id="userName"
+                  name="userName"
+                  value={userName}
+                  placeholder="Enter your name"
+                  onChange={handleChange}
+                />
+                <AiOutlineUserAdd className="icon" />
+              </label>
+            </div>
+            <div className="form-group icon-input">
+              <label
+                className="form-label fw-bolder text-white"
+                htmlFor="email"
+              >
+                Email
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  name="email"
+                  value={email}
+                  placeholder="Enter your email"
+                  onChange={handleChange}
+                />
+                <AiOutlineMail className="icon" />
+              </label>
+            </div>
+            <div className="form-group icon-input">
+              <label
+                className="form-label fw-bolder text-white"
+                htmlFor="phoneNumber"
+              >
+                Phone Number
+                <input
+                  type="number"
+                  className="form-control"
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  value={phoneNumber}
+                  placeholder="111-123-1234"
+                  onChange={handleChange}
+                />
+                <AiOutlinePhone className="icon" />
+              </label>
+            </div>
+            <div className="form-group icon-input">
+              <label
+                className="form-label fw-bolder text-white"
+                htmlFor="password"
+              >
+                Password
+                <input
+                  type={formData.showPassword ? 'text' : 'password'}
+                  className="form-control"
+                  id="password"
+                  name="password"
+                  value={password}
+                  placeholder="Enter your password"
+                  onChange={handleChange}
+                />
+                <AiFillLock className="icon" />
+                <span className="password-icon" onClick={togglePassword}>
+                  {formData.showPassword ? (
+                    <AiOutlineEye />
+                  ) : (
+                    <AiOutlineEyeInvisible />
+                  )}
+                </span>
+              </label>
+            </div>
+            <div className="form-group icon-input">
+              <label className="form-label fw-bolder text-white">
+                Confirm Password
+                <input
+                  type={formData.showConfirmPassword ? 'text' : 'password'}
+                  className="form-control"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  value={confirmPassword}
+                  placeholder="Enter your confirm password"
+                  onChange={handleChange}
+                />
+                <AiFillLock className="icon" />
+                <span className="password-icon" onClick={toggleConfirmPassword}>
+                  {formData.showConfirmPassword ? (
+                    <AiOutlineEye />
+                  ) : (
+                    <AiOutlineEyeInvisible />
+                  )}
+                </span>
+              </label>
+            </div>
+            <div className="form-group d-flex">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                checked={isChecked}
+                onChange={(e) =>
+                  setFormData({ ...formData, isChecked: !isChecked })
+                }
+                id="flexCheckDefault"
+              />
+              <label
+                className="form-check-label text-white"
+                htmlFor="flexCheckDefault"
+              >
+                &nbsp;I agree to the{' '}
+                <Link to="/terms" className="text-decoration-none text-primary">
+                  Terms of Service
+                </Link>{' '}
+                and{' '}
+                <Link
+                  to="/privacy"
+                  className="text-decoration-none text-primary"
+                >
+                  Privacy Policy
+                </Link>
+              </label>
+            </div>
+            <button
+              type="submit"
+              className="btn btn-primary w-25 my-2"
+              disabled={!isChecked}
+            >
+              Register
+            </button>
+            <div className="text-center text-white">
+              Already have an account?{' '}
+              <Link to="/Login" className="text-decoration-none text-primary">
+                {' '}
+                Sign In
               </Link>
-            </label>
-          </div>
-          <button
-            type="submit"
-            className="btn btn-primary w-100 my-2"
-            disabled={!isChecked}
-          >
-            Register
-          </button>
-          <div className="text-center">
-            Already have an account?{' '}
-            <Link to="/Login" className="text-decoration-none text-primary">
-              {' '}
-              Sign In
-            </Link>
-          </div>
-        </form>
-      </section>
+            </div>
+          </form>
+        </section>
+      </div>
     </Layout>
   )
 }

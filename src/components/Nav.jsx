@@ -3,7 +3,7 @@ import { navRoutes } from '../utils/routes'
 import { Link, useNavigate } from 'react-router-dom'
 import { FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa'
 import { logoutAction, reset } from '../features/auth/authSlice'
-import Logo from '../assets/img/updatedlogo.png'
+import Logo from '../assets/img/transparent.png'
 
 const Nav = () => {
   const { user } = useSelector((state) => state.auth)

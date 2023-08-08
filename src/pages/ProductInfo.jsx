@@ -61,85 +61,87 @@ const ProductInfo = () => {
 
   return (
     <Layout title="Customer Info">
-      <h1 className="fw-bold text-center mt-3">Customer Info</h1>
-      <section className="container d-flex justify-content-center">
-        <form onSubmit={onSubmit}>
-          <div className="form-group">
-            <label htmlFor="firstName" className="form-label fw-bolder">
-              First Name
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="firstName"
-              name="firstName"
-              value={firstName}
-              placeholder="Enter your first name"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="lastName" className="form-label fw-bolder">
-              Last Name
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="lastName"
-              name="lastName"
-              value={lastName}
-              placeholder="Enter your last name"
-              onChange={handleChange}
-            />
-          </div>
-          <span className="form-label fw-bolder">Image</span>
-          <div className="form-group d-flex gap-3">
-            <label
-              id="file-input-label"
-              htmlFor="file-input"
-              className="file-input-label"
+      <div className="prduct-bgwrapper">
+        <section className="container d-flex justify-content-center">
+          <form onSubmit={onSubmit} className="mt-5">
+            <h1 className="fw-bold text-center">Customer Info</h1>
+            <div className="form-group">
+              <label htmlFor="firstName" className="form-label fw-bolder">
+                First Name
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="firstName"
+                name="firstName"
+                value={firstName}
+                placeholder="Enter your first name"
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="lastName" className="form-label fw-bolder">
+                Last Name
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="lastName"
+                name="lastName"
+                value={lastName}
+                placeholder="Enter your last name"
+                onChange={handleChange}
+              />
+            </div>
+            <span className="form-label fw-bolder">Image</span>
+            <div className="form-group d-flex gap-3">
+              <label
+                id="file-input-label"
+                htmlFor="file-input"
+                className="file-input-label"
+              >
+                Upload QR code
+              </label>
+              <input
+                type="file"
+                className="form-control"
+                accept="image/*"
+                id="file-input"
+                name="file-input"
+                onChange={handleImageUpload}
+              />
+              <button
+                type="button"
+                className="btn btn-primary mt-2"
+                style={{ width: '40px', height: '45px' }}
+                onClick={() => setModalIsOpen(true)}
+              >
+                <span style={{ marginLeft: '-2.5px' }}>?</span>
+              </button>
+            </div>
+            <ResponsiveModal
+              open={modalIsOpen}
+              onClose={() => setModalIsOpen(false)}
+              center
+              classNames={{
+                modal: 'custom-modal',
+                overlay: 'custom-overlay',
+              }}
+              styles={{
+                modal: {
+                  padding: '20px',
+                  borderRadius: '10px',
+                },
+              }}
             >
-              Upload QR code
-            </label>
-            <input
-              type="file"
-              className="form-control"
-              accept="image/*"
-              id="file-input"
-              name="file-input"
-              onChange={handleImageUpload}
-            />
-            <button
-              type="button"
-              className="btn btn-primary mt-2"
-              style={{ width: '40px', height: '45px' }}
-              onClick={() => setModalIsOpen(true)}
-            >
-              <span style={{ marginLeft: '-2.5px' }}>?</span>
+              <p className="fw-lighter">{barCodeInfo.info}</p>
+            </ResponsiveModal>
+            <button type="submit" className="btn btn-primary w-100 mb-5">
+              {isLoading ? 'Loading...' : 'Create Order'}
             </button>
-          </div>
-          <ResponsiveModal
-            open={modalIsOpen}
-            onClose={() => setModalIsOpen(false)}
-            center
-            classNames={{
-              modal: 'custom-modal',
-              overlay: 'custom-overlay',
-            }}
-            styles={{
-              modal: {
-                padding: '20px',
-                borderRadius: '10px',
-              },
-            }}
-          >
-            <p className="fw-lighter">{barCodeInfo.info}</p>
-          </ResponsiveModal>
-          <button type="submit" className="btn btn-primary w-100 mb-5">
-            {isLoading ? 'Loading...' : 'Create Order'}
-          </button>
-        </form>
-      </section>
+          </form>
+        </section>
+      </div>
     </Layout>
   )
 }

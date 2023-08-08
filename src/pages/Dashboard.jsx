@@ -22,7 +22,7 @@ const Dashboard = () => {
 
   return (
     <Layout title="Dashboard">
-      <div className="container">
+      <div className="container" style={{ height: '100vh' }}>
         <Grid container spacing={3}>
           <Grid item xs={12} lg={6} md={12}>
             <div>

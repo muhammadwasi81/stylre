@@ -16,6 +16,7 @@ import {
   TableBody,
   TableRow,
   TableCell,
+  Box,
 } from '@mui/material'
 
 const PaymentInfo = () => {
@@ -109,11 +110,12 @@ const PaymentInfo = () => {
   }
   return (
     <Layout title="Payment Information">
-      <form
-        onSubmit={onSubmit}
-        className="container d-flex justify-content-center flex-column align-items-center mt-3   mt-md-5"
-      >
-        {/* <div className="mb-3">
+      <div className="payment-info">
+        <form
+          onSubmit={onSubmit}
+          className="container d-flex justify-content-center flex-column align-items-center"
+        >
+          {/* <div className="mb-3">
           <label className="form-label fw-bolder">Email</label>
           <input
             className="form-control"
@@ -124,7 +126,7 @@ const PaymentInfo = () => {
             placeholder="Enter your email address"
           />
         </div> */}
-        {/* <div className="mb-3">
+          {/* <div className="mb-3">
           <label className="form-label fw-bolder">Amount</label>
           <input
             className="form-control"
@@ -135,84 +137,169 @@ const PaymentInfo = () => {
             placeholder="Enter the amount you want to pay"
           />
         </div> */}
-        <Card
-          style={{
-            maxWidth: '500px',
-            width: '100%',
-            borderRadius: '10px',
-            boxShadow: '0 0 10px rgba(0,0,0,0.2)',
-            margin: '0 auto',
-            border: 'none',
-            marginBottom: '20px',
-          }}
-        >
-          <CardContent>
-            <Typography variant="h5" component="h2">
-              Order Details
+          <Typography variant="h4" gutterBottom fontWeight={'600'}>
+            Order Details
+          </Typography>
+          <Box component="div">
+            <Box
+              sx={{
+                border: '3px solid #f8931f',
+                width: { xs: '100%', md: '100%', lg: '500px' },
+                height: '44px',
+                padding: '10px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                borderRadius: '5px',
+                marginBottom: '10px',
+              }}
+            >
+              <Typography
+                variant="h6"
+                gutterBottom
+                fontWeight={'600'}
+                fontSize={16}
+              >
+                Processing Fee :
+              </Typography>
+              <Typography
+                variant="h6"
+                gutterBottom
+                fontWeight={'600'}
+                fontSize={16}
+              >
+                ${processingFee}
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                border: '3px solid #f8931f',
+                width: { xs: '100%', md: '100%', lg: '500px' },
+                height: '44px',
+                padding: '10px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                borderRadius: '5px',
+                marginBottom: '10px',
+              }}
+            >
+              <Typography
+                variant="h6"
+                gutterBottom
+                fontWeight={'600'}
+                fontSize={16}
+              >
+                Service Fee :
+              </Typography>
+              <Typography
+                variant="h6"
+                gutterBottom
+                fontWeight={'600'}
+                fontSize={16}
+              >
+                ${serviceFee}
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                border: '3px solid #f8931f',
+                width: { xs: '100%', md: '100%', lg: '500px' },
+                height: '44px',
+                padding: '10px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                borderRadius: '5px',
+                marginBottom: '10px',
+              }}
+            >
+              <Typography
+                variant="h6"
+                gutterBottom
+                fontWeight={'600'}
+                fontSize={16}
+              >
+                DoorDash Fee :
+              </Typography>
+              <Typography
+                variant="h6"
+                gutterBottom
+                fontWeight={'600'}
+                fontSize={16}
+              >
+                ${doorDashFee}
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                border: '3px solid #f8931f',
+                width: { xs: '100%', md: '100%', lg: '500px' },
+                height: '44px',
+                padding: '10px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                borderRadius: '5px',
+                marginBottom: '10px',
+              }}
+            >
+              <Typography
+                variant="h6"
+                gutterBottom
+                fontWeight={'600'}
+                fontSize={16}
+                color="#32CD32"
+              >
+                Total Amount :
+              </Typography>
+              <Typography
+                variant="h6"
+                gutterBottom
+                fontWeight={'600'}
+                fontSize={16}
+                color="#32CD32"
+              >
+                ${'21.00'}
+              </Typography>
+            </Box>
+          </Box>
+          <Box>
+            <Typography
+              variant="h4"
+              gutterBottom
+              fontWeight={'600'}
+              textAlign={'center'}
+              textTransform={'capitalize'}
+            >
+              <span style={{ color: 'var(--primary)' }}>Choose</span>
+              <br /> payment method
             </Typography>
-            <TableContainer>
-              <Table>
-                <TableBody>
-                  <TableRow>
-                    <TableCell>
-                      <strong>Processing Fee:</strong>
-                    </TableCell>
-                    <TableCell>${processingFee}</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>
-                      <strong>Service Fee:</strong>
-                    </TableCell>
-                    <TableCell>${serviceFee}</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>
-                      <strong>DoorDash Fee:</strong>
-                    </TableCell>
-                    <TableCell>${doorDashFee.toFixed(2)}</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>
-                      <strong>Total Amount:</strong>
-                    </TableCell>
-                    <TableCell>
-                      <strong>
-                        $
-                        {Number(amount) +
-                          processingFee +
-                          serviceFee +
-                          doorDashFee}
-                      </strong>
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </CardContent>
-        </Card>
-        <div className="mb-3 w-50 card-wrapper">
-          <label className="form-label fw-bolder">Card Details</label>
-          <CardElement
-            value={cardDetails}
-            onChange={(event) => setCardDetails(event.complete ? event : '')}
-            className="stripe-card"
-            options={{
-              style: {
-                base: {
-                  backgroundColor: '#FFFFFF',
+          </Box>
+          <div className="mb-3 w-50 card-wrapper">
+            <label className="form-label fw-bolder">Card Details</label>
+            <CardElement
+              value={cardDetails}
+              onChange={(event) => setCardDetails(event.complete ? event : '')}
+              className="stripe-card"
+              options={{
+                style: {
+                  base: {
+                    backgroundColor: '#FFFFFF',
+                  },
                 },
-              },
-            }}
-          />
-        </div>
-        <button
-          disabled={loading}
-          className="btn btn-primary payment__btn"
-          type="submit"
-        >
-          {loading ? 'Loading...' : 'Pay'}
-        </button>
-      </form>
+              }}
+            />
+          </div>
+          <button
+            disabled={loading}
+            className="btn btn-primary payment__btn"
+            type="submit"
+          >
+            {loading ? 'Loading...' : 'Pay'}
+          </button>
+        </form>
+      </div>
     </Layout>
   )
 }

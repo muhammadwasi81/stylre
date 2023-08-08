@@ -108,116 +108,135 @@ const DeliveryInfo = () => {
   }
   return (
     <Layout title="Customer Info">
-      <h1 className="fw-bold text-center">Delivery Info</h1>
-      <section className="container d-flex justify-content-center">
-        <form onSubmit={onSubmit}>
-          <div className="form-group">
-            <label htmlFor="storePhoneNumber" className="form-label fw-bolder">
-              Pickup Address
-            </label>
-            <select
-              className="form-control"
-              id="pickupAddress"
-              name="pickupAddress"
-              value={pickupAddress}
-              placeholder="Additional Pickup"
-              onChange={handleChange}
-            >
-              <option value="Select Pickup Address">
-                Select Pickup Address
-              </option>
-              {pickUpAddress.map((address) => (
-                <option key={address.id} value={address.address}>
-                  {address.address}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="form-group">
-            <label htmlFor="storePhoneNumber" className="form-label fw-bolder">
-              Business Name
-            </label>
-            <select
-              className="form-control"
-              id="dropOffAddress"
-              name="dropOffAddress"
-              value={dropOffAddress}
-              placeholder="Select Pickup Business Store"
-              onChange={handleChange}
-            >
-              <option value="">Select Pickup Business Store</option>
-              {businessStores.map((store) => (
-                <option key={store.id} value={store.name}>
-                  {store.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          {dropOffAddress && (
+      <div className="bg-wrapper">
+        <h1 className="fw-bold text-center">Delivery Info</h1>
+        <section className="container d-flex justify-content-center">
+          <form onSubmit={onSubmit}>
             <div className="form-group">
               <label
                 htmlFor="storePhoneNumber"
                 className="form-label fw-bolder"
               >
-                Store Phone Number
+                Pick Up Address
+              </label>
+              <select
+                className="form-control"
+                id="pickupAddress"
+                name="pickupAddress"
+                value={pickupAddress}
+                placeholder="Additional Pickup"
+                onChange={handleChange}
+              >
+                <option value="Select Pickup Address">
+                  Select Pickup Address
+                </option>
+                {pickUpAddress.map((address) => (
+                  <option key={address.id} value={address.address}>
+                    {address.address}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="form-group">
+              <label
+                htmlFor="storePhoneNumber"
+                className="form-label fw-bolder"
+              >
+                Business Name
+              </label>
+              <select
+                className="form-control"
+                id="dropOffAddress"
+                name="dropOffAddress"
+                value={dropOffAddress}
+                placeholder="Select Pickup Business Name"
+                onChange={handleChange}
+              >
+                <option value="">Select Pickup Business Store</option>
+                {businessStores.map((store) => (
+                  <option key={store.id} value={store.name}>
+                    {store.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {dropOffAddress && (
+              <div className="form-group">
+                <label
+                  htmlFor="storePhoneNumber"
+                  className="form-label fw-bolder"
+                >
+                  Store Phone Number
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="storePhoneNumber"
+                  name="storePhoneNumber"
+                  value={getStorePhoneNumber(dropOffAddress)}
+                  disabled
+                />
+              </div>
+            )}
+            {/* if not then remove it */}
+            <div className="form-group">
+              <label
+                htmlFor="storePhoneNumber"
+                className="form-label fw-bolder"
+              >
+                Customer Number
               </label>
               <input
-                type="text"
-                className="form-control bg-transparent"
-                id="storePhoneNumber"
-                name="storePhoneNumber"
-                value={getStorePhoneNumber(dropOffAddress)}
-                disabled
+                type="number"
+                className="form-control"
+                id="pickupPhoneNumber"
+                name="pickupPhoneNumber"
+                value={pickupPhoneNumber}
+                placeholder="Enter customer number"
+                onChange={handleChange}
               />
             </div>
-          )}
-          <div className="form-group">
-            <label htmlFor="storePhoneNumber" className="form-label fw-bolder">
-              Customer Number
-            </label>
-            <input
-              type="number"
-              className="form-control"
-              id="pickupPhoneNumber"
-              name="pickupPhoneNumber"
-              value={pickupPhoneNumber}
-              placeholder="Enter customer number"
-              onChange={handleChange}
-            />
-          </div>
 
-          <div className="form-group">
+            <div className="form-group">
+              <label
+                htmlFor="storePhoneNumber"
+                className="form-label fw-bolder"
+              >
+                Drop Off Number
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                id="dropOffPhoneNumber"
+                name="dropOffPhoneNumber"
+                value={dropOffPhoneNumber}
+                placeholder="Enter your drop off phone number"
+                onChange={handleChange}
+              />
+            </div>
             <label htmlFor="storePhoneNumber" className="form-label fw-bolder">
-              Drop Off Number
+              Order Details
             </label>
-            <input
-              type="number"
-              className="form-control"
-              id="dropOffPhoneNumber"
-              name="dropOffPhoneNumber"
-              value={dropOffPhoneNumber}
-              placeholder="Enter your drop off phone number"
-              onChange={handleChange}
-            />
-          </div>
-          <label htmlFor="storePhoneNumber" className="form-label fw-bolder">
-            Order Details
-          </label>
-          <div className="">
-            <textarea
-              className="text-area"
-              id="pickupReferenceTag"
-              name="pickupReferenceTag"
-              value={pickupReferenceTag}
-              placeholder="Enter Order Details"
-              onChange={handleChange}
-            />
-          </div>
-          <button type="submit" className="btn btn-primary w-100 mb-5">
-            {isLoading ? 'Loading...' : 'Create Delivery'}
-          </button>
-        </form>
-      </section>
+            <div className="">
+              <textarea
+                className="text-area"
+                id="pickupReferenceTag"
+                name="pickupReferenceTag"
+                value={pickupReferenceTag}
+                placeholder="Enter Order Details"
+                onChange={handleChange}
+              />
+            </div>
+            <button
+              type="submit"
+              className="btn btn-primary w-100 mb-5"
+              disabled={isLoading}
+            >
+              {isLoading ? 'Loading...' : 'Create Order'}
+            </button>
+          </form>
+        </section>
+      </div>
     </Layout>
   )
 }
