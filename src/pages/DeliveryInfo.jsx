@@ -94,8 +94,16 @@ const DeliveryInfo = () => {
   return (
     <Layout title="Customer Info">
       <div className="delivery-wrapper">
-        <h1 className="fw-bold text-black text-center">Delivery Info</h1>
-        <section className="container d-flex justify-content-center">
+        <h1
+          className="fw-bold text-black text-center"
+          style={{ marginRight: '200px' }}
+        >
+          Delivery Info
+        </h1>
+        <section
+          className="container d-flex justify-content-center"
+          style={{ marginRight: '200px' }}
+        >
           <form onSubmit={onSubmit}>
             <div className="form-group">
               <label

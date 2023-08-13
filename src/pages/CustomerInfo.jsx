@@ -62,7 +62,10 @@ const ProductInfo = () => {
   return (
     <Layout title="Customer Info">
       <div className="product-wrapper">
-        <section className="container d-flex justify-content-center">
+        <section
+          className="container d-flex justify-content-center"
+          style={{ marginRight: '200px' }}
+        >
           <form onSubmit={onSubmit} className="mt-5">
             <h1 className="fw-bold text-black text-center">Customer Info</h1>
             <div className="form-group">

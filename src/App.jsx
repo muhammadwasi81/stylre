@@ -8,7 +8,7 @@ import Dashboard from './pages/Dashboard'
 import PaymentInfo from './pages/PaymentInfo'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
-import ProductInfo from './pages/ProductInfo'
+import ProductInfo from './pages/CustomerInfo'
 import DeliveryInfo from './pages/DeliveryInfo'
 import Confirmation from './pages/Confirmation'
 const stripePromise = loadStripe(
