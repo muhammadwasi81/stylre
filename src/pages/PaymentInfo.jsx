@@ -17,6 +17,7 @@ import {
   TableRow,
   TableCell,
   Box,
+  Grid,
 } from '@mui/material'
 
 const PaymentInfo = () => {
@@ -137,147 +138,110 @@ const PaymentInfo = () => {
             placeholder="Enter the amount you want to pay"
           />
         </div> */}
-          <Typography variant="h4" gutterBottom fontWeight={'600'}>
-            Order Details
-          </Typography>
-          <Box component="div">
-            <Box
-              sx={{
-                border: '3px solid #f8931f',
-                width: { xs: '100%', md: '100%', lg: '500px' },
-                height: '44px',
-                padding: '10px',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                borderRadius: '5px',
-                marginBottom: '10px',
-              }}
-            >
-              <Typography
-                variant="h6"
-                gutterBottom
-                fontWeight={'600'}
-                fontSize={16}
-              >
-                Processing Fee :
-              </Typography>
-              <Typography
-                variant="h6"
-                gutterBottom
-                fontWeight={'600'}
-                fontSize={16}
-              >
-                ${processingFee}
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                border: '3px solid #f8931f',
-                width: { xs: '100%', md: '100%', lg: '500px' },
-                height: '44px',
-                padding: '10px',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                borderRadius: '5px',
-                marginBottom: '10px',
-              }}
-            >
-              <Typography
-                variant="h6"
-                gutterBottom
-                fontWeight={'600'}
-                fontSize={16}
-              >
-                Service Fee :
-              </Typography>
-              <Typography
-                variant="h6"
-                gutterBottom
-                fontWeight={'600'}
-                fontSize={16}
-              >
-                ${serviceFee}
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                border: '3px solid #f8931f',
-                width: { xs: '100%', md: '100%', lg: '500px' },
-                height: '44px',
-                padding: '10px',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                borderRadius: '5px',
-                marginBottom: '10px',
-              }}
-            >
-              <Typography
-                variant="h6"
-                gutterBottom
-                fontWeight={'600'}
-                fontSize={16}
-              >
-                DoorDash Fee :
-              </Typography>
-              <Typography
-                variant="h6"
-                gutterBottom
-                fontWeight={'600'}
-                fontSize={16}
-              >
-                ${doorDashFee}
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                border: '3px solid #f8931f',
-                width: { xs: '100%', md: '100%', lg: '500px' },
-                height: '44px',
-                padding: '10px',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                borderRadius: '5px',
-                marginBottom: '10px',
-              }}
-            >
-              <Typography
-                variant="h6"
-                gutterBottom
-                fontWeight={'600'}
-                fontSize={16}
-                color="#32CD32"
-              >
-                Total Amount :
-              </Typography>
-              <Typography
-                variant="h6"
-                gutterBottom
-                fontWeight={'600'}
-                fontSize={16}
-                color="#32CD32"
-              >
-                ${'21.00'}
-              </Typography>
-            </Box>
-          </Box>
-          <Box>
-            <Typography
-              variant="h4"
-              gutterBottom
-              fontWeight={'600'}
-              textAlign={'center'}
-              textTransform={'capitalize'}
-            >
-              <span style={{ color: 'var(--primary)' }}>Choose</span>
-              <br /> payment method
+          <Box
+            sx={{
+              background: '#FFFFFF',
+              padding: '20px',
+              borderRadius: '6px',
+              boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+              width: '100%',
+              maxWidth: '500px',
+              mt: 5,
+            }}
+          >
+            <Typography variant="h4" gutterBottom fontWeight="600">
+              Order Details
             </Typography>
+            <Grid container spacing={0}>
+              <Grid item xs={12} md={12} lg={12}>
+                <Box
+                  sx={{
+                    height: '44px',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Typography variant="h6" fontWeight="600" fontSize={16}>
+                    Processing Fee
+                  </Typography>
+                  <Typography variant="h6" fontWeight="600" fontSize={16}>
+                    ${processingFee}
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={12} md={12} lg={12}>
+                <Box
+                  sx={{
+                    height: '44px',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Typography variant="h6" fontWeight="600" fontSize={16}>
+                    Service Fee
+                  </Typography>
+                  <Typography variant="h6" fontWeight="600" fontSize={16}>
+                    ${serviceFee}
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={12} md={12} lg={12}>
+                <Box
+                  sx={{
+                    height: '44px',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Typography variant="h6" fontWeight="600" fontSize={16}>
+                    DoorDash Fee
+                  </Typography>
+                  <Typography variant="h6" fontWeight="600" fontSize={16}>
+                    ${doorDashFee}
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={12} md={12} lg={12}>
+                <Box
+                  sx={{
+                    height: '44px',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Typography variant="h6" fontWeight="600" fontSize={16}>
+                    Tip
+                  </Typography>
+                  <Typography variant="h6" fontWeight="600" fontSize={16}>
+                    ${5}
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={12} md={12} lg={12}>
+                <Box
+                  sx={{
+                    height: '44px',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Typography variant="h6" fontWeight="600" fontSize={16}>
+                    Total
+                  </Typography>
+                  <Typography variant="h6" fontWeight="600" fontSize={16}>
+                    ${50}
+                  </Typography>
+                </Box>
+              </Grid>
+            </Grid>
           </Box>
-          <div className="mb-3 w-50 card-wrapper">
-            <label className="form-label fw-bolder">Card Details</label>
+          <div className="mb-3 w-50 mt-5 card-wrapper">
+            <label className="form-label fw-bolder fs-2">Card Details</label>
             <CardElement
               value={cardDetails}
               onChange={(event) => setCardDetails(event.complete ? event : '')}

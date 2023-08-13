@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { loginAction, reset } from '../features/auth/authSlice'
 import Layout from './Layout'
@@ -13,6 +13,7 @@ import {
 } from 'react-icons/ai'
 
 const Login = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     email: '',
@@ -29,7 +30,7 @@ const Login = () => {
       toast.error(message)
     }
     if (isSuccess || user) {
-      window.location.href = '/'
+      navigate('/')
     }
     return () => {
       dispatch(reset())
@@ -60,6 +61,12 @@ const Login = () => {
     }
     console.log(payload, 'payload')
     dispatch(loginAction(payload))
+      .then(() => {
+        toast.success('User Logged in successfully')
+      })
+      .catch(() => {
+        toast.error('Something went wrong')
+      })
     isSuccess &&
       formData({
         email: '',
@@ -81,14 +88,9 @@ const Login = () => {
           </div>
           <section className="container login-container">
             <form onSubmit={onSubmit}>
-              <h1 className="text-center text-white fw-bolder mb-3 ">
-                Sign In
-              </h1>
+              <h1 className="text-center  fw-bolder mb-3 ">Sign In</h1>
               <div className="form-group icon-input">
-                <label
-                  className="form-label fw-bolder text-white"
-                  htmlFor="email"
-                >
+                <label className="form-label fw-bolder " htmlFor="email">
                   Email
                   <input
                     type="email"
@@ -103,10 +105,7 @@ const Login = () => {
                 </label>
               </div>
               <div className="form-group icon-input">
-                <label
-                  className="form-label fw-bolder text-white"
-                  htmlFor="password"
-                >
+                <label className="form-label fw-bolder " htmlFor="password">
                   Password
                   <input
                     type={formData.showPassword ? 'text' : 'password'}
@@ -129,13 +128,13 @@ const Login = () => {
               </div>
               <button
                 type="submit"
-                className="btn btn-primary w-25"
+                className="btn btn-primary w-50"
                 disabled={isLoading}
               >
                 {isLoading ? 'Loading ...' : 'Login'}
               </button>
               <div>
-                <p className="text-center text-white mt-3">
+                <p className="text-center  mt-3">
                   Don't have an account?{' '}
                   <Link
                     to="/register"

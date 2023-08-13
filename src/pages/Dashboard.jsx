@@ -3,22 +3,20 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { reset } from '../features/auth/authSlice'
 import Layout from './Layout'
-import { toast } from 'react-toastify'
-import { Grid, Typography, Button } from '@mui/material'
+import { Grid, Typography } from '@mui/material'
+import location from '../assets/img/location.png'
 
 const Dashboard = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
+
   useEffect(() => {
     if (!user) {
-      window.location.href = '/Login'
-    } else {
-      navigate('/')
-      toast.success('Login Successfully')
+      return navigate('/Login')
     }
     dispatch(reset())
-  }, [])
+  }, [dispatch])
 
   return (
     <Layout title="Dashboard">
@@ -71,13 +69,10 @@ const Dashboard = () => {
             sx={{ display: { xs: 'none', lg: 'block' } }}
           >
             <img
-              src="https://www.pngitem.com/pimgs/m/522-5229044_e-commerce-store-png-transparent-png.png"
+              src={location}
               alt="product-img"
               className="img-fluid"
-              style={{
-                paddingTop: '20px',
-                height: '100%',
-              }}
+              style={{ height: '80vh', width: '100%' }}
             />
           </Grid>
         </Grid>

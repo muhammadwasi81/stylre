@@ -13,25 +13,19 @@ const DeliveryInfo = () => {
   console.log(deliveries, 'deliveries')
 
   const [formData, setFormData] = useState({
-    pickupAddress: '',
-    pickupPhoneNumber: '',
-    pickupReferenceTag: '',
-    dropOffAddress: '',
-    dropOffBusinessName: '',
-    dropOffPhoneNumber: '',
-    orderValue: '',
-    // tip: '',
+    pickup_address: '', // pickup address
+    pickup_business_name: '', // pickup business name
+    dropoff_phone_number: '', // customer number
+    dropoff_instructions: '', // order details
+    dropoff_address: '', // dropoff address
   })
 
   const {
-    pickupAddress,
-    pickupPhoneNumber,
-    pickupReferenceTag,
-    dropOffAddress,
-    dropOffBusinessName,
-    dropOffPhoneNumber,
-    orderValue,
-    // tip,
+    pickup_address,
+    pickup_business_name,
+    dropoff_phone_number,
+    dropoff_instructions,
+    dropoff_address,
   } = formData
 
   useEffect(() => {
@@ -41,14 +35,11 @@ const DeliveryInfo = () => {
     if (isSuccess) {
       toast.success('Delivery created successfully')
       setFormData({
-        pickupAddress: '',
-        pickupPhoneNumber: '',
-        pickupReferenceTag: '',
-        dropOffAddress: '',
-        dropOffBusinessName: '',
-        dropOffPhoneNumber: '',
-        orderValue: '',
-        tip: '',
+        pickup_address: '', // pickup address
+        pickup_business_name: '', // pickup business name
+        dropoff_phone_number: '', // customer number
+        dropoff_instructions: '', // order details
+        dropoff_address: '', // dropoff address
       })
     }
     dispatch(reset())
@@ -61,30 +52,24 @@ const DeliveryInfo = () => {
     }))
   }
   const requiredFields = [
-    pickupAddress,
-    pickupPhoneNumber,
-    pickupReferenceTag,
-    dropOffAddress,
-    dropOffBusinessName,
-    dropOffPhoneNumber,
-    orderValue,
-    // tip,
+    pickup_address,
+    pickup_business_name,
+    dropoff_phone_number,
+    dropoff_instructions,
+    dropoff_address,
   ]
   const onSubmit = (e) => {
     e.preventDefault()
-    if (requiredFields.includes('')) {
-      return toast.error('Please fill all the fields')
-    }
+    // if (requiredFields.includes('')) {
+    //   return toast.error('Please fill all the fields')
+    // }
     const deliveryData = {
       external_delivery_id: UUID(),
-      pickup_address: pickupAddress,
-      pickup_phone_number: pickupPhoneNumber,
-      pickup_reference_tag: pickupReferenceTag,
-      dropoff_address: dropOffAddress,
-      dropoff_business_name: dropOffBusinessName,
-      dropoff_phone_number: dropOffPhoneNumber,
-      order_value: 200,
-      // tip: tip,
+      pickup_address: '600 4th Ave, Seattle, WA 98101',
+      pickup_business_name,
+      dropoff_phone_number,
+      dropoff_instructions,
+      dropoff_address,
     }
     console.log(deliveryData, 'payloadData')
     dispatch(createDeliveryAction(deliveryData))
@@ -108,22 +93,22 @@ const DeliveryInfo = () => {
   }
   return (
     <Layout title="Customer Info">
-      <div className="bg-wrapper">
-        <h1 className="fw-bold text-center">Delivery Info</h1>
+      <div className="delivery-wrapper">
+        <h1 className="fw-bold text-black text-center">Delivery Info</h1>
         <section className="container d-flex justify-content-center">
           <form onSubmit={onSubmit}>
             <div className="form-group">
               <label
                 htmlFor="storePhoneNumber"
-                className="form-label fw-bolder"
+                className="form-label text-black fw-bolder"
               >
                 Pick Up Address
               </label>
               <select
                 className="form-control"
-                id="pickupAddress"
-                name="pickupAddress"
-                value={pickupAddress}
+                id="pickup_address"
+                name="pickup_address"
+                value={pickup_address}
                 placeholder="Additional Pickup"
                 onChange={handleChange}
               >
@@ -140,15 +125,15 @@ const DeliveryInfo = () => {
             <div className="form-group">
               <label
                 htmlFor="storePhoneNumber"
-                className="form-label fw-bolder"
+                className="form-label  text-black fw-bolder"
               >
                 Business Name
               </label>
               <select
                 className="form-control"
-                id="dropOffAddress"
-                name="dropOffAddress"
-                value={dropOffAddress}
+                id="pickup_business_name"
+                name="pickup_business_name"
+                value={pickup_business_name}
                 placeholder="Select Pickup Business Name"
                 onChange={handleChange}
               >
@@ -160,38 +145,38 @@ const DeliveryInfo = () => {
                 ))}
               </select>
             </div>
-            {dropOffAddress && (
+            {/* {pickup_business_name && (
               <div className="form-group">
                 <label
                   htmlFor="storePhoneNumber"
-                  className="form-label fw-bolder"
+                  className="form-label text-black fw-bolder"
                 >
                   Store Phone Number
                 </label>
                 <input
                   type="text"
                   className="form-control"
-                  id="storePhoneNumber"
-                  name="storePhoneNumber"
-                  value={getStorePhoneNumber(dropOffAddress)}
+                  id="dropoff_phone_number"
+                  name="dropoff_phone_number"
+                  value={getStorePhoneNumber(pickup_business_name)}
                   disabled
                 />
               </div>
-            )}
+            )} */}
             {/* if not then remove it */}
             <div className="form-group">
               <label
                 htmlFor="storePhoneNumber"
-                className="form-label fw-bolder"
+                className="form-label text-black fw-bolder"
               >
                 Customer Number
               </label>
               <input
                 type="number"
                 className="form-control"
-                id="pickupPhoneNumber"
-                name="pickupPhoneNumber"
-                value={pickupPhoneNumber}
+                id="dropoff_phone_number"
+                name="dropoff_phone_number"
+                value={dropoff_phone_number}
                 placeholder="Enter customer number"
                 onChange={handleChange}
               />
@@ -200,29 +185,32 @@ const DeliveryInfo = () => {
             <div className="form-group">
               <label
                 htmlFor="storePhoneNumber"
-                className="form-label fw-bolder"
+                className="form-label text-black fw-bolder"
               >
-                Drop Off Number
+                Drop Off Address
               </label>
               <input
-                type="number"
+                type="text"
                 className="form-control"
-                id="dropOffPhoneNumber"
-                name="dropOffPhoneNumber"
-                value={dropOffPhoneNumber}
-                placeholder="Enter your drop off phone number"
+                id="dropoff_address"
+                name="dropoff_address"
+                value={dropoff_address}
+                placeholder="Enter your drop off Address"
                 onChange={handleChange}
               />
             </div>
-            <label htmlFor="storePhoneNumber" className="form-label fw-bolder">
+            <label
+              htmlFor="storePhoneNumber"
+              className="form-label  text-black fw-bolder"
+            >
               Order Details
             </label>
             <div className="">
               <textarea
                 className="text-area"
-                id="pickupReferenceTag"
-                name="pickupReferenceTag"
-                value={pickupReferenceTag}
+                id="dropoff_instructions"
+                name="dropoff_instructions"
+                value={dropoff_instructions}
                 placeholder="Enter Order Details"
                 onChange={handleChange}
               />

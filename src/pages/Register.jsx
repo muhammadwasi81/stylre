@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Layout from './Layout'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { registerAction, reset } from '../features/auth/authSlice'
 import Loader from '../components/Loader'
@@ -15,6 +15,7 @@ import {
 } from 'react-icons/ai'
 
 const Register = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
@@ -37,11 +38,7 @@ const Register = () => {
       return toast.error(message)
     }
     if (isSuccess || user) {
-      toast.success('User registered successfully')
-      setTimeout(() => {
-        window.location.href = '/'
-      }, 2000)
-      return
+      return navigate('/')
     }
     dispatch(reset())
   }, [dispatch, isSuccess, message, user, isLoading])
@@ -100,7 +97,9 @@ const Register = () => {
       isChecked,
     }
     console.log(userData)
-    dispatch(registerAction(userData))
+    dispatch(registerAction(userData)).then(() => {
+      toast.success('User registered successfully')
+    })
     isSuccess &&
       setFormData({
         userName: '',
@@ -116,14 +115,12 @@ const Register = () => {
       <div className="signup-wrapper">
         <section className="container signupWrapper">
           <form onSubmit={onSubmit}>
-            <h1 className="text-black fw-bolder text-white">
-              Create an Account
-            </h1>
-            <p className="text-black fw-normal text-white">
+            <h1 className="text-black fw-bolder ">Create an Account</h1>
+            <p className="text-black fw-normal ">
               The faster you sign up, the faster you get the goods.
             </p>
             <div className="form-group icon-input">
-              <label className="form-label fw-bolder text-white" htmlFor="name">
+              <label className="form-label fw-bolder " htmlFor="name">
                 Name
                 <input
                   type="text"
@@ -138,10 +135,7 @@ const Register = () => {
               </label>
             </div>
             <div className="form-group icon-input">
-              <label
-                className="form-label fw-bolder text-white"
-                htmlFor="email"
-              >
+              <label className="form-label fw-bolder " htmlFor="email">
                 Email
                 <input
                   type="email"
@@ -156,10 +150,7 @@ const Register = () => {
               </label>
             </div>
             <div className="form-group icon-input">
-              <label
-                className="form-label fw-bolder text-white"
-                htmlFor="phoneNumber"
-              >
+              <label className="form-label fw-bolder " htmlFor="phoneNumber">
                 Phone Number
                 <input
                   type="number"
@@ -174,10 +165,7 @@ const Register = () => {
               </label>
             </div>
             <div className="form-group icon-input">
-              <label
-                className="form-label fw-bolder text-white"
-                htmlFor="password"
-              >
+              <label className="form-label fw-bolder " htmlFor="password">
                 Password
                 <input
                   type={formData.showPassword ? 'text' : 'password'}
@@ -199,7 +187,7 @@ const Register = () => {
               </label>
             </div>
             <div className="form-group icon-input">
-              <label className="form-label fw-bolder text-white">
+              <label className="form-label fw-bolder ">
                 Confirm Password
                 <input
                   type={formData.showConfirmPassword ? 'text' : 'password'}
@@ -230,10 +218,7 @@ const Register = () => {
                 }
                 id="flexCheckDefault"
               />
-              <label
-                className="form-check-label text-white"
-                htmlFor="flexCheckDefault"
-              >
+              <label className="form-check-label " htmlFor="flexCheckDefault">
                 &nbsp;I agree to the{' '}
                 <Link to="/terms" className="text-decoration-none text-primary">
                   Terms of Service
@@ -249,12 +234,12 @@ const Register = () => {
             </div>
             <button
               type="submit"
-              className="btn btn-primary w-25 my-2"
+              className="btn btn-primary w-50 my-2"
               disabled={!isChecked}
             >
               Register
             </button>
-            <div className="text-center text-white">
+            <div className="text-center ">
               Already have an account?{' '}
               <Link to="/Login" className="text-decoration-none text-primary">
                 {' '}

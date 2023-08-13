@@ -161,19 +161,41 @@ input[type='number']::-webkit-outer-spin-button {
   border: none;
   background: none;
 }
-.login-wrapper,
+
 .signup-wrapper {
-  background: url('https://images.unsplash.com/photo-1580828343064-fde4fc206bc6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80')
-    no-repeat center center/cover;
+  background: url('./assets/img/signup.png') no-repeat;
+  background-size: contain;
+  background-position: 100% 50%;
   min-width: 100%;
   min-height: 100vh;
 }
-.prduct-bgwrapper {
-  background: url('https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/secured-attachments/messaging_message/attachment/15dda09a9f3e8d3cf1d70ce2ce8a0450-28191951690575547.721719/91907C49-05FA-4E8B-B125-65A93A9D101C.jpeg?__cld_token__=exp=1691504479~hmac=f6ae03b9b5f0b74ab31423c4c62fc302ae4c6cd94accb56384dd1cc2ea7d5830')
-    no-repeat center center/cover;
+.login-wrapper {
+  background: url('./assets/img/sun-tornado.svg') no-repeat;
+  background-size: cover;
+  background-position: center;
   min-width: 100%;
   min-height: 100vh;
-  color: #ffffff;
+}
+.delivery-wrapper {
+  background: url('./assets/img/customer.png') no-repeat;
+  background-size: contain;
+  background-position: 100% 50%;
+  min-width: 100%;
+  min-height: 100vh;
+}
+.product-wrapper {
+  background: url('./assets/img/confirmation.png') no-repeat;
+  background-size: contain;
+  background-position: 150% 100%;
+  min-width: 100%;
+  min-height: 100vh;
+}
+.payment-info {
+  background: url('./assets/img/payment.png') no-repeat;
+  background-size: contain;
+  background-position: 100% 50%;
+  min-width: 100%;
+  min-height: 100vh;
 }
 .icon-input {
   position: relative;
@@ -198,10 +220,17 @@ input[type='number']::-webkit-outer-spin-button {
   color: grey;
 }
 @media (max-width: 600px) {
-  .login-wrapper,
+  .login-wrapper {
+    background-position: 100% 50%;
+  }
   .signup-wrapper {
-    background-size: cover;
-    background-position: center top;
+    background-position: 100% 50%;
+  }
+  .delivery-wrapper {
+    background-position: 100% 50%;
+  }
+  .product-wrapper {
+    background-position: 100% 50%;
   }
   .icon-input .password-icon {
     right: 15px;
@@ -213,22 +242,4 @@ input[type='number']::-webkit-outer-spin-button {
     min-width: 270px !important;
     width: 100%;
   }
-}
-
-.bg-wrapper {
-  background-image: url('https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/secured-attachments/messaging_message/attachment/86c441c20fbf7875f617abfb83ae3b42-28191951690639057.297683/1834B67B-E4F7-4253-925D-2E8717C454CD.jpeg?__cld_token__=exp=1691504199~hmac=b54a4731df05a998bb812b12d7a46387a2abe2a4bc3b756662c6728dd57e7fa4');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;
-  color: #fff;
-}
-
-.payment-info {
-  background-image: url('https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/secured-attachments/messaging_message/attachment/d793bd9af2e4d0d17fb609b15d1a382e-28191951690575547.930812/104BDA4D-0104-4921-8DD7-49DFED5D107F.jpeg?__cld_token__=exp=1691504479~hmac=f92fe16140c6395804957df0c755578727aba20e7660f8b26498b2cf0a538afe');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;
-  color: #fff;
 }

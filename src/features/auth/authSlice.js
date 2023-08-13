@@ -6,7 +6,7 @@ const user = JSON.parse(localStorage.getItem('user'))
 
 const initialState = {
   user: user ? user : null,
-  userDetail: null,
+  userDetail: false,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -112,28 +112,27 @@ export const authSlice = createSlice({
       .addCase(loginAction.pending, (state) => {
         console.log('pending')
         state.isLoading = true
-        state.userStatus = false
+        state.isSuccess = false
       })
       .addCase(loginAction.fulfilled, (state, action) => {
-        console.log(action.payload.data, 'fulfilled')
+        console.log(action.payload, 'fulfilled')
         state.isLoading = false
-        state.userStatus = true
-        state.user = action.payload.data
+        state.isSuccess = true
+        state.user = action.payload
       })
       .addCase(loginAction.rejected, (state, action) => {
         console.log('rejected', action.payload)
         state.isLoading = false
         state.isError = true
+        state.isSuccess = false
         state.message = action.payload
-        state.user = null
-        state.userStatus = false
       })
       .addCase(getUserByIdAction.pending, (state) => {
         console.log('pending')
         state.isLoading = true
       })
       .addCase(getUserByIdAction.fulfilled, (state, action) => {
-        console.log(action.payload.data, 'fulfilled')
+        console.log(action.payload, 'fulfilled')
         state.isLoading = false
         state.isSuccess = true
         state.userDetail = action.payload

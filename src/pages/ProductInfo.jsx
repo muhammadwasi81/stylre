@@ -61,12 +61,15 @@ const ProductInfo = () => {
 
   return (
     <Layout title="Customer Info">
-      <div className="prduct-bgwrapper">
+      <div className="product-wrapper">
         <section className="container d-flex justify-content-center">
           <form onSubmit={onSubmit} className="mt-5">
-            <h1 className="fw-bold text-center">Customer Info</h1>
+            <h1 className="fw-bold text-black text-center">Customer Info</h1>
             <div className="form-group">
-              <label htmlFor="firstName" className="form-label fw-bolder">
+              <label
+                htmlFor="firstName"
+                className="form-label text-black fw-bolder"
+              >
                 First Name
               </label>
               <input
@@ -80,7 +83,10 @@ const ProductInfo = () => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="lastName" className="form-label fw-bolder">
+              <label
+                htmlFor="lastName"
+                className="form-label text-black fw-bolder"
+              >
                 Last Name
               </label>
               <input
@@ -93,12 +99,12 @@ const ProductInfo = () => {
                 onChange={handleChange}
               />
             </div>
-            <span className="form-label fw-bolder">Image</span>
+            <span className="form-label text-black fw-bolder">Image</span>
             <div className="form-group d-flex gap-3">
               <label
                 id="file-input-label"
                 htmlFor="file-input"
-                className="file-input-label"
+                className="file-input-label text-black fw-bolder"
               >
                 Upload QR code
               </label>
