@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { loginAction, reset } from '../features/auth/authSlice'
 import Layout from './Layout'
-import Logo from '../assets/img/logo.png'
+import Logo from '../assets/img/blacklogo.webp'
 import {
   AiOutlineEye,
   AiOutlineEyeInvisible,
@@ -83,7 +83,7 @@ const Login = () => {
               src={Logo}
               alt="logo"
               className="img-fluid mt-5"
-              style={{ width: '200px', cursor: 'pointer' }}
+              style={{ width: '250px', height: '200px', cursor: 'pointer' }}
             />
           </div>
           <section className="container login-container">
