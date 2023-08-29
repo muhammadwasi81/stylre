@@ -12,7 +12,7 @@ const createDeliveryService = async (deliveryData) => {
     return response.data.data
   } catch (error) {
     console.log(error.message, 'error creating delivery')
-    throw new Error(error.message, { cause: error })
+    throw new Error(error, { cause: error })
   }
 }
 

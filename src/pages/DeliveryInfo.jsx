@@ -18,6 +18,11 @@ const DeliveryInfo = () => {
     dropoff_phone_number: '', // customer number
     dropoff_instructions: '', // order details
     dropoff_address: '', // dropoff address
+    pickup_reference_tag: '', // pickup reference tag
+    dropoff_contact_given_name: '',
+    pickup_instructions: '',
+    pickup_phone_number: '',
+    tip: '',
   })
 
   const {
@@ -26,7 +31,13 @@ const DeliveryInfo = () => {
     dropoff_phone_number,
     dropoff_instructions,
     dropoff_address,
+    pickup_reference_tag,
+    dropoff_contact_given_name,
+    pickup_instructions,
+    pickup_phone_number,
+    tip,
   } = formData
+  console.log(formData, 'formData')
 
   useEffect(() => {
     if (isError) {
@@ -40,6 +51,11 @@ const DeliveryInfo = () => {
         dropoff_phone_number: '', // customer number
         dropoff_instructions: '', // order details
         dropoff_address: '', // dropoff address
+        pickup_reference_tag: '', // pickup reference tag
+        dropoff_contact_given_name: '',
+        pickup_instructions: '',
+        pickup_phone_number: '',
+        tip: '',
       })
     }
     dispatch(reset())
@@ -57,31 +73,43 @@ const DeliveryInfo = () => {
     dropoff_phone_number,
     dropoff_instructions,
     dropoff_address,
+    pickup_reference_tag,
+    dropoff_contact_given_name,
+    pickup_instructions,
+    pickup_phone_number,
+    tip,
   ]
   const onSubmit = (e) => {
     e.preventDefault()
-    // if (requiredFields.includes('')) {
-    //   return toast.error('Please fill all the fields')
-    // }
-    const deliveryData = {
+    if (requiredFields.includes('')) {
+      return toast.error('Please fill all the fields')
+    }
+    const payload = {
       external_delivery_id: UUID(),
       pickup_address: '600 4th Ave, Seattle, WA 98101',
       pickup_business_name,
-      dropoff_phone_number,
+      dropoff_phone_number: '+' + dropoff_phone_number,
       dropoff_instructions,
       dropoff_address,
+      pickup_reference_tag,
+      dropoff_contact_given_name,
+      pickup_instructions,
+      pickup_phone_number,
+      tip,
     }
-    console.log(deliveryData, 'payloadData')
-    dispatch(createDeliveryAction(deliveryData))
+    console.log('payloadData=>', payload)
+    dispatch(createDeliveryAction(payload))
     isSuccess &&
       setFormData({
-        pickupAddress: '',
-        pickupPhoneNumber: '',
-        pickupReferenceTag: '',
-        dropOffAddress: '',
-        dropOffBusinessName: '',
-        dropOffPhoneNumber: '',
-        orderValue: '',
+        pickup_address: '',
+        pickup_business_name: '',
+        dropoff_phone_number: '',
+        dropoff_instructions: '',
+        dropoff_address: '',
+        pickup_reference_tag: '',
+        dropoff_contact_given_name: '',
+        pickup_instructions: '',
+        pickup_phone_number: '',
         tip: '',
       })
   }
@@ -91,6 +119,7 @@ const DeliveryInfo = () => {
     const store = storesData.find((store) => store.name === storeName)
     return store ? store.phone : ''
   }
+
   return (
     <Layout title="Customer Info">
       <div className="delivery-wrapper">
@@ -177,7 +206,7 @@ const DeliveryInfo = () => {
                 htmlFor="storePhoneNumber"
                 className="form-label text-black fw-bolder"
               >
-                Customer Number
+                DropOff Number
               </label>
               <input
                 type="number"
@@ -207,6 +236,95 @@ const DeliveryInfo = () => {
                 onChange={handleChange}
               />
             </div>
+
+            {/* Added Fields */}
+            <div className="form-group">
+              <label
+                htmlFor="pickup_reference_tag"
+                className="form-label text-black fw-bolder"
+              >
+                Pickup Reference Tag
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="pickup_reference_tag"
+                name="pickup_reference_tag"
+                value={pickup_reference_tag}
+                placeholder="Enter Pickup Reference Tag"
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-group">
+              <label
+                htmlFor="dropoff_contact_given_name"
+                className="form-label text-black fw-bolder"
+              >
+                Dropoff Contact Given Name
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="dropoff_contact_given_name"
+                name="dropoff_contact_given_name"
+                value={dropoff_contact_given_name}
+                placeholder="Enter Dropoff Contact Given Name"
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-group">
+              <label
+                htmlFor="pickup_instructions"
+                className="form-label text-black fw-bolder"
+              >
+                Pickup Instructions
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="pickup_instructions"
+                name="pickup_instructions"
+                value={pickup_instructions}
+                placeholder="Enter Pickup Instructions"
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-group">
+              <label
+                htmlFor="pickup_phone_number"
+                className="form-label text-black fw-bolder"
+              >
+                Pickup Phone Number
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="pickup_phone_number"
+                name="pickup_phone_number"
+                value={pickup_phone_number}
+                placeholder="Enter Pickup Phone Number"
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="tip" className="form-label text-black fw-bolder">
+                Tip
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="tip"
+                name="tip"
+                value={tip}
+                placeholder="Enter Tip"
+                onChange={handleChange}
+              />
+            </div>
+
             <label
               htmlFor="storePhoneNumber"
               className="form-label  text-black fw-bolder"
@@ -223,6 +341,7 @@ const DeliveryInfo = () => {
                 onChange={handleChange}
               />
             </div>
+
             <button
               type="submit"
               className="btn btn-primary w-100 mb-5"
