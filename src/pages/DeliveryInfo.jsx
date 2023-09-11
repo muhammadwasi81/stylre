@@ -22,7 +22,9 @@ const DeliveryInfo = () => {
     dropoff_contact_given_name: '',
     pickup_instructions: '',
     pickup_phone_number: '',
+    order_value: '',
     tip: '',
+    action_if_undeliverable: '',
   })
 
   const {
@@ -35,7 +37,9 @@ const DeliveryInfo = () => {
     dropoff_contact_given_name,
     pickup_instructions,
     pickup_phone_number,
+    order_value,
     tip,
+    action_if_undeliverable,
   } = formData
   console.log(formData, 'formData')
 
@@ -56,6 +60,8 @@ const DeliveryInfo = () => {
         pickup_instructions: '',
         pickup_phone_number: '',
         tip: '',
+        order_value: '',
+        action_if_undeliverable: '',
       })
     }
     dispatch(reset())
@@ -77,7 +83,9 @@ const DeliveryInfo = () => {
     dropoff_contact_given_name,
     pickup_instructions,
     pickup_phone_number,
+    order_value,
     tip,
+    action_if_undeliverable,
   ]
   const onSubmit = (e) => {
     e.preventDefault()
@@ -96,6 +104,8 @@ const DeliveryInfo = () => {
       pickup_instructions,
       pickup_phone_number,
       tip,
+      order_value,
+      action_if_undeliverable,
     }
     console.log('payloadData=>', payload)
     dispatch(createDeliveryAction(payload))
@@ -110,7 +120,9 @@ const DeliveryInfo = () => {
         dropoff_contact_given_name: '',
         pickup_instructions: '',
         pickup_phone_number: '',
+        order_value: '',
         tip: '',
+        action_if_undeliverable: '',
       })
   }
   // order value will be calculated by location
@@ -321,6 +333,42 @@ const DeliveryInfo = () => {
                 name="tip"
                 value={tip}
                 placeholder="Enter Tip"
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-group">
+              <label
+                htmlFor="orderValue"
+                className="form-label text-black fw-bolder"
+              >
+                Order Value
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                id="order_value"
+                name="order_value"
+                value={order_value}
+                placeholder="Enter Order Value"
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-group">
+              <label
+                htmlFor="orderValue"
+                className="form-label text-black fw-bolder"
+              >
+                Action If Undeliverable
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="action_if_undeliverable"
+                name="action_if_undeliverable"
+                value={action_if_undeliverable}
+                placeholder="Enter Order Value"
                 onChange={handleChange}
               />
             </div>
