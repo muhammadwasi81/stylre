@@ -87,6 +87,11 @@ const DeliveryInfo = () => {
     tip,
     action_if_undeliverable,
   ]
+
+  const formattedTip = tip.includes('.') ? tip : `${tip}.99`
+  const formattedOrderValue = order_value.includes('.')
+    ? order_value
+    : `${order_value}.99`
   const onSubmit = (e) => {
     e.preventDefault()
     if (requiredFields.includes('')) {
@@ -103,8 +108,8 @@ const DeliveryInfo = () => {
       dropoff_contact_given_name,
       pickup_instructions,
       pickup_phone_number,
-      tip,
-      order_value,
+      tip: formattedTip,
+      order_value: formattedOrderValue,
       action_if_undeliverable,
     }
     console.log('payloadData=>', payload)
