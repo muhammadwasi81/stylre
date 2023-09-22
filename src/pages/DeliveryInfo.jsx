@@ -108,8 +108,8 @@ const DeliveryInfo = () => {
       dropoff_contact_given_name,
       pickup_instructions,
       pickup_phone_number,
-      tip: formattedTip,
-      order_value: formattedOrderValue,
+      tip: Number(formattedTip),
+      order_value: Number(formattedOrderValue),
       action_if_undeliverable,
     }
     console.log('payloadData=>', payload)
