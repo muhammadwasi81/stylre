@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { loginAction, reset } from '../features/auth/authSlice'
-import Layout from './Layout'
 import Logo from '../assets/img/blacklogo.webp'
 import {
   AiOutlineEye,
@@ -11,6 +10,7 @@ import {
   AiOutlineMail,
   AiFillLock,
 } from 'react-icons/ai'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -76,6 +76,11 @@ const Login = () => {
   }
   return (
     <>
+      <HelmetProvider>
+        <Helmet>
+          <title>{`Stylre - Login`}</title>
+        </Helmet>
+      </HelmetProvider>
       <div className="login-wrapper">
         <div className="d-flex justify-content-center">
           <img
