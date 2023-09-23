@@ -76,79 +76,76 @@ const Login = () => {
   }
   return (
     <>
-      <Layout title="Login">
-        {/* {isLoading && <Loader />} */}
-        <div className="login-wrapper">
-          <div className="d-flex justify-content-center">
-            <img
-              src={Logo}
-              alt="logo"
-              className="img-fluid mt-5"
-              style={{ width: '250px', height: '200px', cursor: 'pointer' }}
-            />
-          </div>
-          <section className="container login-container">
-            <form onSubmit={onSubmit}>
-              <h1 className="text-center  fw-bolder mb-3 ">Sign In</h1>
-              <div className="form-group icon-input">
-                <label className="form-label fw-bolder " htmlFor="email">
-                  Email
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    name="email"
-                    value={email}
-                    placeholder="Enter your email"
-                    onChange={handleChange}
-                  />
-                  <AiOutlineMail className="icon" />
-                </label>
-              </div>
-              <div className="form-group icon-input">
-                <label className="form-label fw-bolder " htmlFor="password">
-                  Password
-                  <input
-                    type={formData.showPassword ? 'text' : 'password'}
-                    className="form-control"
-                    id="password"
-                    name="password"
-                    value={password}
-                    placeholder="Enter your password"
-                    onChange={handleChange}
-                  />
-                  <AiFillLock className="icon" />
-                  <span className="password-icon" onClick={togglePassword}>
-                    {formData.showPassword ? (
-                      <AiOutlineEye />
-                    ) : (
-                      <AiOutlineEyeInvisible />
-                    )}
-                  </span>
-                </label>
-              </div>
-              <button
-                type="submit"
-                className="btn btn-primary w-50"
-                disabled={isLoading}
-              >
-                {isLoading ? 'Loading ...' : 'Login'}
-              </button>
-              <div>
-                <p className="text-center  mt-3">
-                  Don't have an account?{' '}
-                  <Link
-                    to="/register"
-                    className="text-decoration-none text-primary"
-                  >
-                    Sign up
-                  </Link>
-                </p>
-              </div>
-            </form>
-          </section>
+      <div className="login-wrapper">
+        <div className="d-flex justify-content-center">
+          <img
+            src={Logo}
+            alt="logo"
+            className="img-fluid mt-5"
+            style={{ width: '250px', height: '200px', cursor: 'pointer' }}
+          />
         </div>
-      </Layout>
+        <section className="container login-container">
+          <form onSubmit={onSubmit}>
+            <h1 className="text-center  fw-bolder mb-3 ">Sign In</h1>
+            <div className="form-group icon-input">
+              <label className="form-label fw-bolder " htmlFor="email">
+                Email
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  name="email"
+                  value={email}
+                  placeholder="Enter your email"
+                  onChange={handleChange}
+                />
+                <AiOutlineMail className="icon" />
+              </label>
+            </div>
+            <div className="form-group icon-input">
+              <label className="form-label fw-bolder " htmlFor="password">
+                Password
+                <input
+                  type={formData.showPassword ? 'text' : 'password'}
+                  className="form-control"
+                  id="password"
+                  name="password"
+                  value={password}
+                  placeholder="Enter your password"
+                  onChange={handleChange}
+                />
+                <AiFillLock className="icon" />
+                <span className="password-icon" onClick={togglePassword}>
+                  {formData.showPassword ? (
+                    <AiOutlineEye />
+                  ) : (
+                    <AiOutlineEyeInvisible />
+                  )}
+                </span>
+              </label>
+            </div>
+            <button
+              type="submit"
+              className="btn btn-primary w-50"
+              disabled={isLoading}
+            >
+              {isLoading ? 'Loading ...' : 'Login'}
+            </button>
+            <div>
+              <p className="text-center  mt-3">
+                Don't have an account?{' '}
+                <Link
+                  to="/register"
+                  className="text-decoration-none text-primary"
+                >
+                  Sign up
+                </Link>
+              </p>
+            </div>
+          </form>
+        </section>
+      </div>
     </>
   )
 }

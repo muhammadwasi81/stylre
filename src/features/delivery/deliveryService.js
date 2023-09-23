@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const apiGlobal = axios.create({
   // baseURL: 'http://localhost:8000/api/delivery/',
-  baseURL: 'https://stylere.onrender.com//api/delivery',
+  baseURL: 'https://stylere.onrender.com/api/delivery',
 })
 
 const createDeliveryService = async (deliveryData) => {
