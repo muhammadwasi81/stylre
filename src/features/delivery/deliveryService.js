@@ -16,8 +16,22 @@ const createDeliveryService = async (deliveryData) => {
   }
 }
 
+const getDeliveryStatusService = async (userId) => {
+  console.log(userId, 'userId in service')
+  try {
+    const response = await apiGlobal.get(
+      `/get_delivery_status?userId=${userId}`
+    )
+    console.log(response.data, 'getDeliveryStatus')
+    return response.data
+  } catch (error) {
+    console.log(error.message, 'error getting delivery status')
+    throw new Error(error.message, { cause: error })
+  }
+}
 const deliveryService = {
   createDeliveryService,
+  getDeliveryStatusService,
 }
 
 export default deliveryService

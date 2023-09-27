@@ -21,6 +21,7 @@ import TradingIcon from '@mui/icons-material/AttachMoneyRounded'
 import { NavItem } from '../NavItem'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutAction, reset } from '../../features/auth/authSlice'
+import { CiDeliveryTruck } from 'react-icons/ci'
 
 const items = [
   {
@@ -38,7 +39,11 @@ const items = [
     icon: <AdminGroupIcon fontSize="small" />,
     title: 'Payment',
   },
-
+  {
+    href: '/DeliveryStatus',
+    icon: <CiDeliveryTruck fontSize="small" />,
+    title: 'Delivery Status',
+  },
   {
     href: '/Confirmation',
     icon: <TradingIcon fontSize="small" />,

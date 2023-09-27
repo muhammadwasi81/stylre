@@ -16,6 +16,11 @@ const navRoutes = [
   },
   {
     id: 7,
+    path: '/DeliveryStatus',
+    name: 'Delivery Status',
+  },
+  {
+    id: 8,
     path: '/Confirmation',
     name: 'Confirmation',
   },
