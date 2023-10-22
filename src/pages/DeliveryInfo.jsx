@@ -7,6 +7,7 @@ import { createDeliveryAction, reset } from '../features/delivery/deliverySlice'
 
 const DeliveryInfo = () => {
   const dispatch = useDispatch()
+
   const { deliveries, isError, isLoading, message, isSuccess } = useSelector(
     (state) => state.delivery
   )

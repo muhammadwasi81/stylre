@@ -62,8 +62,13 @@ const Login = () => {
     console.log(payload, 'payload')
     dispatch(loginAction(payload))
       .then((res) => {
+        console.log(res, 'res')
         res.type === 'auth/login/fulfilled' &&
-          toast.success('User Logged in successfully')
+          toast.success(
+            res.payload.isAdmin
+              ? 'Admin Login successfully'
+              : 'User Login successfully'
+          )
       })
       .catch(() => {
         toast.error('Something went wrong')

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import apiPrefix from '../../utils/token'
 
 const apiGlobal = axios.create({
   // baseURL: 'http://localhost:8000/api/delivery/',
@@ -7,7 +8,10 @@ const apiGlobal = axios.create({
 
 const createDeliveryService = async (deliveryData) => {
   try {
-    const response = await apiGlobal.post(`/create_delivery`, deliveryData)
+    const response = await apiPrefix.post(
+      `delivery/create_delivery`,
+      deliveryData
+    )
     console.log(response.data, 'createDeliveryService')
     return response.data.data
   } catch (error) {

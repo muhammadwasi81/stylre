@@ -14,48 +14,16 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded'
 import SendRoundedIcon from '@mui/icons-material/SendRounded'
 import SubscriptionsRoundedIcon from '@mui/icons-material/SubscriptionsRounded'
-import GroupIcon from '@mui/icons-material/GroupRounded'
-import PersonalIcon from '@mui/icons-material/PersonRounded'
-import AdminGroupIcon from '@mui/icons-material/GroupAddRounded'
-import TradingIcon from '@mui/icons-material/AttachMoneyRounded'
 import { NavItem } from '../NavItem'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutAction, reset } from '../../features/auth/authSlice'
-import { CiDeliveryTruck } from 'react-icons/ci'
+import { adminRoutes, navRoutes } from '../../utils/routes'
 
-const items = [
-  {
-    href: '/Address',
-    icon: <GroupIcon fontSize="small" />,
-    title: 'Customer Info',
-  },
-  {
-    href: '/Info',
-    icon: <PersonalIcon fontSize="small" />,
-    title: 'Delivery Info',
-  },
-  {
-    href: '/Payment',
-    icon: <AdminGroupIcon fontSize="small" />,
-    title: 'Payment',
-  },
-  {
-    href: '/DeliveryStatus',
-    icon: <CiDeliveryTruck fontSize="small" />,
-    title: 'Delivery Status',
-  },
-  {
-    href: '/Confirmation',
-    icon: <TradingIcon fontSize="small" />,
-    title: 'Confirmation',
-  },
-]
 export const DashboardSidebar = (props) => {
   const { user } = useSelector((state) => state.auth)
-  console.log({ user }, 'user in dashboard sidebar')
+  console.log(user, 'user in dashboard sidebar')
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  console.log({ user })
   const { open, onClose } = props
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'), {
     defaultMatches: true,
@@ -68,10 +36,19 @@ export const DashboardSidebar = (props) => {
   }
 
   useEffect(() => {
+    if (!user) {
+      navigate('/Login')
+    }
+  }, [user])
+
+  useEffect(() => {
     if (open) {
       onClose?.()
     }
   }, [])
+
+  const routesToShow =
+    (user && user.isAdmin) || user.data.isAdmin ? adminRoutes : navRoutes
 
   const content = (
     <>
@@ -96,11 +73,22 @@ export const DashboardSidebar = (props) => {
               }}
             >
               <div>
-                {/* <Typography color="inherit" variant="subtitle1">
-                  Admin
-                </Typography> */}
+                {(user && user?.isAdmin) || user?.data?.isAdmin === true ? (
+                  <Typography
+                    color="#fff"
+                    variant="h6"
+                    fontSize={14}
+                    gutterBottom
+                  >
+                    Admin
+                  </Typography>
+                ) : (
+                  <Typography color="#fff" variant="h6" fontSize={14}>
+                    Customer
+                  </Typography>
+                )}
                 <Typography color="#fff" variant="h6" fontSize={14}>
-                  Welcome: {user && user.data.userName}
+                  Welcome: {(user && user?.userName) || user?.data?.userName}
                 </Typography>
               </div>
             </Box>
@@ -108,17 +96,15 @@ export const DashboardSidebar = (props) => {
         </div>
         <Box sx={{ my: 2 }} />
         <Box sx={{ flexGrow: 1 }}>
-          {items.map((item, index) => {
-            return (
-              <NavItem
-                key={index}
-                value={item}
-                href={item.href}
-                icon={item.icon}
-                title={item.title}
-              />
-            )
-          })}
+          {routesToShow.map((item, index) => (
+            <NavItem
+              key={index}
+              value={item}
+              href={item.href}
+              icon={item.icon}
+              title={item.title}
+            />
+          ))}
         </Box>
         <Box
           sx={{

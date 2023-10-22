@@ -6,8 +6,8 @@ export const NavItem = (props) => {
   const { href, icon, title, ...others } = props
   const location = useLocation()
   const active = location.pathname === href
-  console.log(active, 'active')
-  console.log({ href })
+  // console.log(active, 'active')
+  // console.log({ href })
   return (
     <ListItem
       disableGutters

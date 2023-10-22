@@ -36,6 +36,19 @@ const getUserById = async (id) => {
   return response.data
 }
 
+const dashboardData = async () => {
+  try {
+    const response = await axios.get(
+      `https://stylere.onrender.com/api/admin/dashboard_data`
+    )
+    console.log(response.data, 'dashboardData.service')
+    return response.data
+  } catch (error) {
+    console.log(error, 'error')
+    throw new Error(error, { cause: error })
+  }
+}
+
 // Logout user
 const logoutService = () => {
   localStorage.removeItem('user')
@@ -46,6 +59,7 @@ const authService = {
   logoutService,
   loginService,
   getUserById,
+  dashboardData,
 }
 
 export default authService
