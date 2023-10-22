@@ -48,7 +48,7 @@ export const DashboardSidebar = (props) => {
   }, [])
 
   const routesToShow =
-    (user && user.isAdmin) || user.data.isAdmin ? adminRoutes : navRoutes
+    (user && user?.isAdmin) || user?.data?.isAdmin ? adminRoutes : navRoutes
 
   const content = (
     <>
