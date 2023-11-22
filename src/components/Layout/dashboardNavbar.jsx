@@ -37,7 +37,7 @@ export const DashboardNavbar = (props) => {
           color="black"
           sx={{ display: { xs: 'none', lg: 'block' } }}
         >
-          Welcome to Stylere
+          Welcome to Style.re
         </Typography>
         <Box sx={{ flexGrow: 1 }} />
 

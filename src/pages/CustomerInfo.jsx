@@ -14,6 +14,8 @@ const ProductInfo = () => {
   const { isError, isLoading, message, isSuccess } = useSelector(
     (state) => state.product
   )
+  const { user } = useSelector((state) => state.auth)
+  console.log({ user })
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -53,6 +55,7 @@ const ProductInfo = () => {
       return toast.error('Please fill all the fields')
     }
     const formData = new FormData()
+    formData.append('userId', user.data._id || user._id)
     formData.append('firstName', firstName)
     formData.append('lastName', lastName)
     formData.append('image', image)

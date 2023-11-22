@@ -18,6 +18,7 @@ import { NavItem } from '../NavItem'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutAction, reset } from '../../features/auth/authSlice'
 import { adminRoutes, navRoutes } from '../../utils/routes'
+import { toast } from 'react-toastify'
 
 export const DashboardSidebar = (props) => {
   const { user } = useSelector((state) => state.auth)
@@ -30,7 +31,14 @@ export const DashboardSidebar = (props) => {
   })
 
   const handleLogout = () => {
-    dispatch(logoutAction())
+    dispatch(logoutAction()).then((res) => {
+      console.log('dispatch', res)
+      if (res.type === 'auth/logout/fulfilled') {
+        toast.success('Logout successfully')
+      } else {
+        toast.error('something went wrong')
+      }
+    })
     dispatch(reset())
     navigate('/Login')
   }
