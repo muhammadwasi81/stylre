@@ -9,6 +9,7 @@ import {
   TableRow,
   Container,
   Avatar,
+  Tab,
 } from '@mui/material'
 import moment from 'moment'
 import { dashboardDataAction } from '../features/auth/authSlice'
@@ -35,6 +36,7 @@ const ProductList = () => {
                 <TableCell>Image</TableCell>
                 <TableCell>FIRST NAME</TableCell>
                 <TableCell>LAST NAME</TableCell>
+                <TableCell>BAR CODE</TableCell>
                 <TableCell>Created At</TableCell>
                 <TableCell>Updated At</TableCell>
               </TableRow>
@@ -51,6 +53,15 @@ const ProductList = () => {
                     </TableCell>
                     <TableCell>{product.firstName}</TableCell>
                     <TableCell>{product.lastName}</TableCell>
+                    <TableCell>
+                      <Avatar
+                        alt={product.firstName}
+                        src={
+                          'https://stylere.onrender.com/uploads/' +
+                          product.image
+                        }
+                      />
+                    </TableCell>
                     <TableCell>
                       {moment(product.createdAt).format('DD/MM/YYYY')}
                     </TableCell>
