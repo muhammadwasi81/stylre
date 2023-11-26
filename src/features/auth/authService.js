@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+const ADMIN_PREFIX = 'https://stylere.onrender.com/api/admin/'
+
 const apiGlobal = axios.create({
   // baseURL: 'http://localhost:8000/api/users',
   baseURL: 'https://stylere.onrender.com/api/users',
@@ -38,10 +40,19 @@ const getUserById = async (id) => {
 
 const dashboardData = async () => {
   try {
-    const response = await axios.get(
-      `https://stylere.onrender.com/api/admin/dashboard_data`
-    )
+    const response = await axios.get(`${ADMIN_PREFIX}dashboard_data`)
     console.log(response.data, 'dashboardData.service')
+    return response.data
+  } catch (error) {
+    console.log(error, 'error')
+    throw new Error(error, { cause: error })
+  }
+}
+
+const dashboardStats = async () => {
+  try {
+    const response = await axios.get(`${ADMIN_PREFIX}dashboard_stats`)
+    console.log(response.data, 'dashboardStats.service')
     return response.data
   } catch (error) {
     console.log(error, 'error')
@@ -60,6 +71,7 @@ const authService = {
   loginService,
   getUserById,
   dashboardData,
+  dashboardStats,
 }
 
 export default authService

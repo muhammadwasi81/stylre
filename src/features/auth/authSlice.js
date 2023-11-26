@@ -7,6 +7,7 @@ console.log(user, 'user in authSlice')
 const initialState = {
   user: user ? user : null,
   dashboardData: {},
+  dashboardStats: {},
   userDetail: false,
   isError: false,
   isSuccess: false,
@@ -94,6 +95,26 @@ export const dashboardDataAction = createAsyncThunk(
     }
   }
 )
+
+export const dashboardStatsAction = createAsyncThunk(
+  'auth/dashboardStats',
+  async (_, thunkAPI) => {
+    try {
+      const response = await authService.dashboardStats()
+      console.log(response.data, 'dashboardStatsAction')
+      return response.data
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 export const logoutAction = createAsyncThunk('auth/logout', async () => {
   await authService.logoutService()
 })
@@ -166,20 +187,35 @@ export const authSlice = createSlice({
       })
       .addCase(dashboardDataAction.pending, (state) => {
         console.log('pending')
-        state.isLoading = true
+        state.dashboardData.isLoading = true
       })
       .addCase(dashboardDataAction.fulfilled, (state, action) => {
         console.log(action.payload, 'dashboard.slice.fulfilled')
-        state.isLoading = false
+        state.dashboardData.isLoading = false
         state.isSuccess = true
         state.dashboardData = action.payload
       })
       .addCase(dashboardDataAction.rejected, (state, action) => {
         console.log('rejected', action.payload)
-        state.isLoading = false
+        state.dashboardData.isLoading = false
         state.isError = true
         state.message = action.payload
         state.dashboardData = null
+      })
+      .addCase(dashboardStatsAction.pending, (state) => {
+        console.log('pending')
+        state.isLoading = true
+      })
+      .addCase(dashboardStatsAction.fulfilled, (state, action) => {
+        console.log(action.payload, 'dashboardStatsAction.fulfilled')
+        state.isLoading = false
+        state.isSuccess = true
+        state.dashboardStats = action.payload
+      })
+      .addCase(dashboardStatsAction.rejected, (state, action) => {
+        console.log('rejected', action.payload)
+        state.isError = true
+        state.message = action.payload
       })
       .addCase(logoutAction.fulfilled, (state) => {
         state.user = null

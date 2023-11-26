@@ -17,6 +17,7 @@ import DeliveryStatus from './pages/DeliveryStatus'
 import UsersList from './pages/UsersList'
 import ProductList from './pages/ProductList'
 import DeliveryList from './pages/DeliveryList'
+import AdminDashboard from './pages/AdminDashboard'
 const stripePromise = loadStripe(
   'pk_test_51MihFAKHS9EGHah4Zu1HV4k83qBovFz6HjJM1ACkqiLZstcTWfSisDTUZqGIbVDQJhqzrcioz1qpP4vlKehecqG900Xxexg2nu'
 )
@@ -38,6 +39,7 @@ const App = () => {
             <Route path="/admin/users" element={<UsersList />} />
             <Route path="/admin/products" element={<ProductList />} />
             <Route path="/admin/deliveries" element={<DeliveryList />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route
               path="/Payment"
               element={
