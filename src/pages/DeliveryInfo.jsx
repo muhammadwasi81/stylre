@@ -101,9 +101,9 @@ const DeliveryInfo = () => {
     }
     const payload = {
       external_delivery_id: UUID(),
-      pickup_address: '600 4th Ave, Seattle, WA 98101',
+      pickup_address,
       pickup_business_name,
-      dropoff_phone_number: '+' + dropoff_phone_number,
+      dropoff_phone_number: `+${dropoff_phone_number}`,
       dropoff_instructions,
       dropoff_address,
       pickup_reference_tag,
@@ -221,7 +221,7 @@ const DeliveryInfo = () => {
                     htmlFor="storePhoneNumber"
                     className="form-label text-black fw-bolder"
                   >
-                    DropOff Number
+                    Customer Number
                   </label>
                   <input
                     type="number"
@@ -239,7 +239,7 @@ const DeliveryInfo = () => {
                     htmlFor="storePhoneNumber"
                     className="form-label text-black fw-bolder"
                   >
-                    Drop Off Address
+                    Customer Address
                   </label>
                   <input
                     type="text"
@@ -258,7 +258,7 @@ const DeliveryInfo = () => {
                     htmlFor="pickup_reference_tag"
                     className="form-label text-black fw-bolder"
                   >
-                    Pickup Reference Tag
+                    Additional Drop-Off Information
                   </label>
                   <input
                     type="text"
@@ -266,7 +266,7 @@ const DeliveryInfo = () => {
                     id="pickup_reference_tag"
                     name="pickup_reference_tag"
                     value={pickup_reference_tag}
-                    placeholder="Enter Pickup Reference Tag"
+                    placeholder="Enter Additional Drop-Off Information"
                     onChange={handleChange}
                   />
                 </div>
@@ -276,7 +276,7 @@ const DeliveryInfo = () => {
                     htmlFor="dropoff_contact_given_name"
                     className="form-label text-black fw-bolder"
                   >
-                    Dropoff Contact Given Name
+                    Contact Name
                   </label>
                   <input
                     type="text"
@@ -284,7 +284,7 @@ const DeliveryInfo = () => {
                     id="dropoff_contact_given_name"
                     name="dropoff_contact_given_name"
                     value={dropoff_contact_given_name}
-                    placeholder="Enter Dropoff Contact Given Name"
+                    placeholder="Enter Contact Name"
                     onChange={handleChange}
                   />
                 </div>
@@ -330,7 +330,7 @@ const DeliveryInfo = () => {
                     htmlFor="tip"
                     className="form-label text-black fw-bolder"
                   >
-                    Tip
+                    Driver Tip
                   </label>
                   <input
                     type="text"
@@ -338,7 +338,7 @@ const DeliveryInfo = () => {
                     id="tip"
                     name="tip"
                     value={tip}
-                    placeholder="Enter Tip"
+                    placeholder="Enter Driver Tip"
                     onChange={handleChange}
                   />
                 </div>
@@ -348,7 +348,7 @@ const DeliveryInfo = () => {
                     htmlFor="orderValue"
                     className="form-label text-black fw-bolder"
                   >
-                    Order Value
+                    Pickup Order Value
                   </label>
                   <input
                     type="number"
@@ -356,7 +356,7 @@ const DeliveryInfo = () => {
                     id="order_value"
                     name="order_value"
                     value={order_value}
-                    placeholder="Enter Order Value"
+                    placeholder="Enter Pickup Order Value"
                     onChange={handleChange}
                   />
                 </div>
@@ -366,17 +366,21 @@ const DeliveryInfo = () => {
                     htmlFor="orderValue"
                     className="form-label text-black fw-bolder"
                   >
-                    Action If Undeliverable
+                    If Order Unavailable
                   </label>
-                  <input
-                    type="text"
+                  <select
                     className="form-control w-100"
                     id="action_if_undeliverable"
                     name="action_if_undeliverable"
                     value={action_if_undeliverable}
-                    placeholder="Enter Order Value"
+                    placeholder="Enter Unavailable Order"
                     onChange={handleChange}
-                  />
+                  >
+                    <option value="">Select Unavailable Order</option>
+                    <option value="return_to_pickup">Refund Order</option>
+                    <option value="return_to_pickup">Cancel Order</option>
+                    <option value="return_to_pickup">Other</option>
+                  </select>
                 </div>
 
                 <label

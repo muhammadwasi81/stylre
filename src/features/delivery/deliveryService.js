@@ -1,10 +1,4 @@
-import axios from 'axios'
 import apiPrefix from '../../utils/token'
-
-const apiGlobal = axios.create({
-  // baseURL: 'http://localhost:8000/api/delivery/',
-  baseURL: 'https://stylere.onrender.com/api/delivery',
-})
 
 const createDeliveryService = async (deliveryData) => {
   try {
@@ -23,7 +17,7 @@ const createDeliveryService = async (deliveryData) => {
 const getDeliveryStatusService = async (userId) => {
   console.log(userId, 'userId in service')
   try {
-    const response = await apiGlobal.get(
+    const response = await apiPrefix.get(
       `/get_delivery_status?userId=${userId}`
     )
     console.log(response.data, 'getDeliveryStatus')

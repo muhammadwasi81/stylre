@@ -1,13 +1,14 @@
 import axios from 'axios'
 
 const getAuthToken = () => {
-  const userData = JSON.parse(localStorage.getItem('user'))
-  console.log(userData, 'userData')
-  return userData?.accessToken || ''
+  const userInfo = JSON.parse(localStorage.getItem('user'))
+  console.log(userInfo.data.token, 'userData from token')
+  return userInfo?.data.token ?? ''
 }
 
 const apiPrefix = axios.create({
-  baseURL: 'https://stylere.onrender.com/api/',
+  // baseURL: 'https://stylere.onrender.com/api/',
+  baseURL: 'http://localhost:8000/api/',
 })
 
 apiPrefix.interceptors.request.use(function (config) {
@@ -22,11 +23,10 @@ apiPrefix.interceptors.response.use(
     return response
   },
   function (error) {
-    console.log(error.response, 'error.response')
+    console.error(error, 'error.response')
     if (error.response && error.response.status === 401) {
-      console.log('401 error')
       localStorage.removeItem('user')
-      window.location.href = '/login'
+      // window.location.href = '/login'
     }
     return Promise.reject(error)
   }

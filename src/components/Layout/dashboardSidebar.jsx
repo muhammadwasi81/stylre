@@ -22,7 +22,7 @@ import { toast } from 'react-toastify'
 
 export const DashboardSidebar = (props) => {
   const { user } = useSelector((state) => state.auth)
-  console.log(user, 'user in dashboard sidebar')
+  // console.log(user, 'user in dashboard sidebar')
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { open, onClose } = props
