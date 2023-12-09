@@ -36,6 +36,7 @@ const DeliveryList = () => {
                 <TableCell>Email</TableCell>
                 <TableCell>Pickup Address</TableCell>
                 <TableCell>Dropoff Address</TableCell>
+                <TableCell>Tracking Url</TableCell>
                 <TableCell>Order Value</TableCell>
                 <TableCell>Created At</TableCell>
                 <TableCell>Updated At</TableCell>
@@ -51,6 +52,7 @@ const DeliveryList = () => {
                     <TableCell>{delivery.pickup_address}</TableCell>
                     <TableCell>{delivery.dropoff_address}</TableCell>
                     <TableCell>{delivery.order_value}</TableCell>
+                    <TableCell>{delivery.tracking_url}</TableCell>
                     <TableCell>
                       {moment(delivery.createdAt).format('DD/MM/YYYY')}
                     </TableCell>
