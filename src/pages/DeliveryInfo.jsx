@@ -5,6 +5,7 @@ import { UUID, businessStores, pickUpAddress, storesData } from '../utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { createDeliveryAction, reset } from '../features/delivery/deliverySlice'
 import customerInfoImg from '../assets/img/customer.png'
+import { FaSpinner } from 'react-icons/fa'
 
 const DeliveryInfo = () => {
   const dispatch = useDispatch()
@@ -405,7 +406,7 @@ const DeliveryInfo = () => {
                   className="btn btn-primary w-100 mb-5"
                   disabled={isLoading}
                 >
-                  {isLoading ? 'Please wait' : 'Create Order'}
+                  {isLoading ? <FaSpinner /> : 'Create Order'}
                 </button>
               </form>
             </section>

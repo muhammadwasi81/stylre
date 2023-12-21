@@ -11,6 +11,7 @@ import {
   AiFillLock,
 } from 'react-icons/ai'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { FaSpinner } from 'react-icons/fa'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -140,7 +141,7 @@ const Login = () => {
               className="btn btn-primary w-50"
               disabled={isLoading}
             >
-              {isLoading ? 'Loading ...' : 'Login'}
+              {isLoading ? <FaSpinner /> : 'Login'}
             </button>
             <div>
               <p className="text-center  mt-3">
