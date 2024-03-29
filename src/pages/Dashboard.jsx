@@ -16,14 +16,15 @@ const Dashboard = () => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
         setUserName(firebaseUser.displayName)
-      } else {
-        setUserName('')
+        navigate('/')
+      } else if (!user) {
+        navigate('/Login')
       }
     })
     return () => {
       unsubscribe()
     }
-  }, [])
+  }, [navigate, user])
 
   useEffect(() => {
     if (!user && !userName) {

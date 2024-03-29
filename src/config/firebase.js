@@ -9,7 +9,7 @@ import { getAuth, GoogleAuthProvider } from 'firebase/auth'
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: 'AIzaSyDlmlN6OHwIpMVsJM7c5i0OxrhlOyg0enE',
-  authDomain: 'https://stylre.vercel.app/',
+  authDomain: 'stylre.firebaseapp.com',
   projectId: 'stylre',
   storageBucket: 'stylre.appspot.com',
   messagingSenderId: '860843145475',
