@@ -13,6 +13,8 @@ const initialState = {
   isSuccess: false,
   isLoading: false,
   message: '',
+  photoURL: null, // Add field for photoURL
+  email: null, // Add field for email
 }
 
 // Register user
@@ -123,12 +125,18 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
+    setAdditionalUserInfo: (state, action) => {
+      state.photoURL = action.payload.photoURL
+      state.email = action.payload.email
+    },
     reset: (state) => {
       state.isLoading = false
       state.isSuccess = false
       state.userStatus = false
       state.isError = false
       state.message = ''
+      state.photoURL = null // Reset photoURL
+      state.email = null
     },
   },
   extraReducers: (builder) => {
@@ -223,5 +231,5 @@ export const authSlice = createSlice({
   },
 })
 
-export const { reset } = authSlice.actions
+export const { reset, setAdditionalUserInfo } = authSlice.actions
 export default authSlice.reducer

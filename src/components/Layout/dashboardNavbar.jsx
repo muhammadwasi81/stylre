@@ -1,9 +1,10 @@
 import { AppBar, Avatar, IconButton, Toolbar, Typography } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import MenuIcon from '@mui/icons-material/Menu'
 import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
 import { Box } from '@mui/system'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -14,6 +15,20 @@ export const label = { inputProps: { 'aria-label': 'Switch demo' } }
 
 export const DashboardNavbar = (props) => {
   const { onSidebarOpen, ...other } = props
+  const [avatarUrl, setUserAvatar] = useState('')
+
+  useEffect(() => {
+    const auth = getAuth()
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      console.log(firebaseUser, 'firebaseUser')
+      if (firebaseUser) {
+        setUserAvatar(firebaseUser.photoURL)
+      }
+    })
+    return () => {
+      unsubscribe()
+    }
+  }, [])
 
   return (
     <DashboardNavbarRoot
@@ -43,7 +58,7 @@ export const DashboardNavbar = (props) => {
 
         <Avatar
           alt="Cindy Baker"
-          src="https://mui.com/static/images/avatar/1.jpg"
+          src={avatarUrl || 'https://mui.com/static/images/avatar/1.jpg'}
           sx={{ height: 40, width: 40, ml: 1 }}
         />
       </Toolbar>

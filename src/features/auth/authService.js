@@ -3,8 +3,8 @@ import axios from 'axios'
 const ADMIN_PREFIX = 'https://stylere.onrender.com/api/admin/'
 
 const apiGlobal = axios.create({
-  // baseURL: 'http://localhost:8000/api/users',
-  baseURL: 'https://stylere.onrender.com/api/users',
+  baseURL: 'http://localhost:8000/api/users',
+  // baseURL: 'https://stylere.onrender.com/api/users',
 })
 
 const registerService = async (userData) => {

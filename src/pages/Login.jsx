@@ -2,7 +2,11 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { loginAction, reset } from '../features/auth/authSlice'
+import {
+  loginAction,
+  reset,
+  setAdditionalUserInfo,
+} from '../features/auth/authSlice'
 import Logo from '../assets/img/blacklogo.webp'
 import {
   AiOutlineEye,
@@ -12,6 +16,9 @@ import {
 } from 'react-icons/ai'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { FaSpinner } from 'react-icons/fa'
+import { auth, googleProvider } from '../config/firebase'
+import { signInWithPopup, signOut } from 'firebase/auth'
+import Auth from './Auth'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -26,17 +33,35 @@ const Login = () => {
     (state) => state.auth
   )
 
+  const signInWithGoogle = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider)
+      const user = result.user
+      console.log('firebaseuser=>', user)
+      const photoURL = user.photoURL
+      const email = user.email
+      dispatch(setAdditionalUserInfo({ photoURL, email }))
+      navigate('/')
+      toast.success('Logged in successfully')
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  useEffect(() => {
+    if (user) {
+      navigate('/')
+    }
+  }, [user, navigate])
+
   useEffect(() => {
     if (isError) {
       toast.error(message)
     }
-    if (isSuccess || user) {
-      navigate('/')
-    }
     return () => {
       dispatch(reset())
     }
-  }, [isError, isSuccess, message, user, dispatch])
+  }, [isError, message, dispatch])
 
   const handleChange = (e) => {
     setFormData((prevState) => ({
@@ -88,17 +113,18 @@ const Login = () => {
         </Helmet>
       </HelmetProvider>
       <div className="login-wrapper">
-        <div className="d-flex justify-content-center">
-          <img
-            src={Logo}
-            alt="logo"
-            className="img-fluid mt-5"
-            style={{ width: '250px', height: '200px', cursor: 'pointer' }}
-          />
-        </div>
         <section className="container login-container">
+          <div className="d-flex justify-content-center mb-3">
+            <img
+              src={Logo}
+              alt="logo"
+              className="img-fluid mt-5"
+              style={{ width: '250px', height: '200px', cursor: 'pointer' }}
+            />
+          </div>
+          {<Auth signInWithGoogle={signInWithGoogle} />}
           <form onSubmit={onSubmit}>
-            <h1 className="text-center  fw-bolder mb-3 ">Sign In</h1>
+            <h1 className="text-center fw-bolder mb-3 ">Sign In</h1>
             <div className="form-group icon-input">
               <label className="form-label fw-bolder " htmlFor="email">
                 Email

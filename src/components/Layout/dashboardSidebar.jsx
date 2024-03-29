@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Button,
   Drawer,
@@ -19,9 +19,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { logoutAction, reset } from '../../features/auth/authSlice'
 import { adminRoutes, navRoutes } from '../../utils/routes'
 import { toast } from 'react-toastify'
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
 
 export const DashboardSidebar = (props) => {
   const { user } = useSelector((state) => state.auth)
+  const [email, setEmail] = useState('')
   // console.log(user, 'user in dashboard sidebar')
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -30,24 +32,44 @@ export const DashboardSidebar = (props) => {
     defaultMatches: true,
   })
 
-  const handleLogout = () => {
-    dispatch(logoutAction()).then((res) => {
-      console.log('dispatch', res)
-      if (res.type === 'auth/logout/fulfilled') {
-        toast.success('Logout successfully')
-      } else {
-        toast.error('something went wrong')
+  useEffect(() => {
+    const auth = getAuth()
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      console.log(firebaseUser, 'firebaseUser')
+      if (firebaseUser) {
+        setEmail(firebaseUser.displayName)
       }
     })
-    dispatch(reset())
-    navigate('/Login')
-  }
+    return () => {
+      unsubscribe()
+    }
+  }, [])
 
-  useEffect(() => {
-    if (!user) {
+  const handleLogout = () => {
+    const auth = getAuth()
+    signOut(auth)
+      .then(() => {
+        dispatch(reset())
+        navigate('/Login')
+        toast.success('Logout successfully')
+      })
+      .catch((error) => {
+        console.error('Error signing out:', error)
+        toast.error('Error signing out')
+      })
+    if (user && user.email) {
+      dispatch(logoutAction()).then((res) => {
+        console.log('dispatch', res)
+        if (res.type === 'auth/logout/fulfilled') {
+          toast.success('Logout successfully')
+        } else {
+          toast.error('something went wrong')
+        }
+      })
+      dispatch(reset())
       navigate('/Login')
     }
-  }, [user])
+  }
 
   useEffect(() => {
     if (open) {
@@ -96,7 +118,8 @@ export const DashboardSidebar = (props) => {
                   </Typography>
                 )}
                 <Typography color="#fff" variant="h6" fontSize={14}>
-                  Welcome: {(user && user?.userName) || user?.data?.userName}
+                  Welcome:{' '}
+                  {(user && user?.userName) || user?.data?.userName || email}
                 </Typography>
               </div>
             </Box>

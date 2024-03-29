@@ -1,22 +1,29 @@
-import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { reset } from '../features/auth/authSlice'
+import { useSelector } from 'react-redux'
 import Layout from './Layout'
 import { Grid, Typography } from '@mui/material'
 import location from '../assets/img/location.png'
+import { useEffect, useState } from 'react'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
 const Dashboard = () => {
   const navigate = useNavigate()
-  const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
+  const [userName, setUserName] = useState('')
 
   useEffect(() => {
-    if (!user) {
-      return navigate('/Login')
+    const auth = getAuth()
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser) {
+        setUserName(firebaseUser.displayName)
+      } else {
+        setUserName('')
+      }
+    })
+    return () => {
+      unsubscribe()
     }
-    dispatch(reset())
-  }, [dispatch])
+  }, [])
 
   return (
     <Layout title="Dashboard">
@@ -29,7 +36,7 @@ const Dashboard = () => {
                 component="h1"
                 className="my-5 fs-1 fw-bolder"
               >
-                Hey, {user?.data?.userName}
+                Hey, {user?.data?.userName || userName}
               </Typography>
               <div>
                 <Typography
