@@ -47,17 +47,20 @@ export const DashboardSidebar = (props) => {
 
   const handleLogout = () => {
     const auth = getAuth()
-    signOut(auth)
-      .then(() => {
-        dispatch(reset())
-        navigate('/Login')
-        toast.success('Logout successfully')
-      })
-      .catch((error) => {
-        console.error('Error signing out:', error)
-        toast.error('Error signing out')
-      })
-    if (user && user.email) {
+    const firebaseUser = auth.currentUser
+
+    if (firebaseUser) {
+      signOut(auth)
+        .then(() => {
+          dispatch(reset())
+          navigate('/Login')
+          toast.success('Logout successfully')
+        })
+        .catch((error) => {
+          console.error('Error signing out:', error)
+          toast.error('Error signing out')
+        })
+    } else if (user) {
       dispatch(logoutAction()).then((res) => {
         console.log('dispatch', res)
         if (res.type === 'auth/logout/fulfilled') {

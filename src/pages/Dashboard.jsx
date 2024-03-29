@@ -25,6 +25,12 @@ const Dashboard = () => {
     }
   }, [])
 
+  useEffect(() => {
+    if (!user && !userName) {
+      navigate('/Login')
+    }
+  }, [user, userName, navigate])
+
   return (
     <Layout title="Dashboard">
       <div className="container" style={{ height: '100vh' }}>
