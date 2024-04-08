@@ -1,13 +1,11 @@
 import apiPrefix from '../../utils/token'
 
-const createDeliveryService = async (deliveryData) => {
+const createDeliveryService = async (payload) => {
+  console.log(payload, 'payload in service')
   try {
-    const response = await apiPrefix.post(
-      `delivery/create_delivery`,
-      deliveryData
-    )
-    console.log(response.data, 'createDeliveryService')
-    return response.data.data
+    const response = await apiPrefix.post(`delivery/create_delivery`, payload)
+    console.log('createDeliveryService=>', response)
+    return response
   } catch (error) {
     console.log(error.message, 'error creating delivery')
     throw new Error(error, { cause: error })

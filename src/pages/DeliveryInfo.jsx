@@ -6,10 +6,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { createDeliveryAction, reset } from '../features/delivery/deliverySlice'
 import customerInfoImg from '../assets/img/customer.png'
 import { FaSpinner } from 'react-icons/fa'
+import ImageUploader from '../components/ImageUploader'
 
 const DeliveryInfo = () => {
+  const [imageUrl, setImageUrl] = useState('')
   const dispatch = useDispatch()
-
   const { deliveries, isError, isLoading, message, isSuccess } = useSelector(
     (state) => state.delivery
   )
@@ -44,29 +45,11 @@ const DeliveryInfo = () => {
     tip,
     action_if_undeliverable,
   } = formData
-  console.log(formData, 'formData')
+  // console.log(formData, 'formData')
 
   useEffect(() => {
-    if (isError) {
-      toast.error(message)
-    }
-    if (isSuccess) {
-      toast.success('Delivery created successfully')
-      setFormData({
-        pickup_address: '', // pickup address
-        pickup_business_name: '', // pickup business name
-        dropoff_phone_number: '', // customer number
-        dropoff_instructions: '', // order details
-        dropoff_address: '', // dropoff address
-        pickup_reference_tag: '', // pickup reference tag
-        dropoff_contact_given_name: '',
-        pickup_instructions: '',
-        pickup_phone_number: '',
-        tip: '',
-        order_value: '',
-        action_if_undeliverable: '',
-      })
-    }
+    if (isError) toast.error(message)
+    if (isSuccess) toast.success('Delivery created successfully')
     dispatch(reset())
   }, [dispatch, isSuccess, message, deliveries, isLoading])
 
@@ -76,6 +59,29 @@ const DeliveryInfo = () => {
       [e.target.name]: e.target.value,
     }))
   }
+  const handleImageUpload = (url) => {
+    console.log('url in handleImageUpload=>', url)
+    setImageUrl(url)
+  }
+  // const recognizeText = async () => {
+  //   try {
+  //     const worker = createWorker({
+  //       logger: (m) => console.log(m),
+  //     })
+  //     await worker.load()
+  //     await worker.loadLanguage('eng')
+  //     await worker.initialize('eng')
+  //     const {
+  //       data: { text },
+  //     } = await worker.recognize(imageUrl)
+  //     await worker.terminate()
+  //     return text
+  //   } catch (error) {
+  //     console.error('Error recognizing text:', error)
+  //     throw error
+  //   }
+  // }
+
   const requiredFields = [
     pickup_address,
     pickup_business_name,
@@ -95,50 +101,56 @@ const DeliveryInfo = () => {
   const formattedOrderValue = order_value.includes('.')
     ? order_value
     : `${order_value}.99`
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
-    if (requiredFields.includes('')) {
-      return toast.error('Please fill all the fields')
+    // if (requiredFields.includes('')) {
+    //   return toast.error('Please fill all the fields')
+    // }
+    try {
+      const pickupReference = `VIEW ORDER PICKUP BARCODE ${123} ${imageUrl}`
+      const payload = {
+        external_delivery_id: UUID(),
+        pickup_address,
+        pickup_business_name,
+        dropoff_phone_number: `+${dropoff_phone_number}`,
+        dropoff_instructions,
+        dropoff_address,
+        pickup_reference_tag: pickupReference,
+        dropoff_contact_given_name,
+        pickup_instructions,
+        pickup_phone_number,
+        tip: Number(formattedTip),
+        order_value: Number(formattedOrderValue),
+        action_if_undeliverable,
+      }
+      console.log('payloadData=>', payload)
+      dispatch(createDeliveryAction(payload))
+      if (isSuccess) {
+        setFormData({
+          pickup_address: '',
+          pickup_business_name: '',
+          dropoff_phone_number: '',
+          dropoff_instructions: '',
+          dropoff_address: '',
+          pickup_reference_tag: '',
+          dropoff_contact_given_name: '',
+          pickup_instructions: '',
+          pickup_phone_number: '',
+          order_value: '',
+          tip: '',
+          action_if_undeliverable: '',
+        })
+      }
+    } catch (error) {
+      console.error('Error:', error)
+      toast.error('Failed to create delivery')
     }
-    const payload = {
-      external_delivery_id: UUID(),
-      pickup_address,
-      pickup_business_name,
-      dropoff_phone_number: `+${dropoff_phone_number}`,
-      dropoff_instructions,
-      dropoff_address,
-      pickup_reference_tag,
-      dropoff_contact_given_name,
-      pickup_instructions,
-      pickup_phone_number,
-      tip: Number(formattedTip),
-      order_value: Number(formattedOrderValue),
-      action_if_undeliverable,
-    }
-    console.log('payloadData=>', payload)
-    dispatch(createDeliveryAction(payload))
-    isSuccess &&
-      setFormData({
-        pickup_address: '',
-        pickup_business_name: '',
-        dropoff_phone_number: '',
-        dropoff_instructions: '',
-        dropoff_address: '',
-        pickup_reference_tag: '',
-        dropoff_contact_given_name: '',
-        pickup_instructions: '',
-        pickup_phone_number: '',
-        order_value: '',
-        tip: '',
-        action_if_undeliverable: '',
-      })
   }
-  // order value will be calculated by location
-  const getStorePhoneNumber = (storeName) => {
-    console.log(storeName, 'storeName')
-    const store = storesData.find((store) => store.name === storeName)
-    return store ? store.phone : ''
-  }
+  // const getStorePhoneNumber = (storeName) => {
+  //   console.log(storeName, 'storeName')
+  //   const store = storesData.find((store) => store.name === storeName)
+  //   return store ? store.phone : ''
+  // }
 
   return (
     <Layout title="Customer Info">
@@ -178,7 +190,7 @@ const DeliveryInfo = () => {
                 <div className="form-group">
                   <label
                     htmlFor="storePhoneNumber"
-                    className="form-label  text-black fw-bolder"
+                    className="form-label text-black fw-bolder"
                   >
                     Business Name
                   </label>
@@ -191,32 +203,17 @@ const DeliveryInfo = () => {
                     onChange={handleChange}
                   >
                     <option value="">Select Pickup Business Store</option>
-                    {businessStores.map((store) => (
-                      <option key={store.id} value={store.name}>
+                    {businessStores.map((store, index) => (
+                      <option key={index} value={store.name}>
                         {store.name}
                       </option>
                     ))}
                   </select>
                 </div>
-                {/* {pickup_business_name && (
-              <div className="form-group">
-                <label
-                  htmlFor="storePhoneNumber"
-                  className="form-label text-black fw-bolder"
-                >
-                  Store Phone Number
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="dropoff_phone_number"
-                  name="dropoff_phone_number"
-                  value={getStorePhoneNumber(pickup_business_name)}
-                  disabled
-                />
-              </div>
-            )} */}
-                {/* if not then remove it */}
+
+                <ImageUploader onImageUpload={handleImageUpload} />
+                {imageUrl && <img src={imageUrl} alt="Uploaded" />}
+
                 <div className="form-group">
                   <label
                     htmlFor="storePhoneNumber"

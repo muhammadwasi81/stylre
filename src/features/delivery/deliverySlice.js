@@ -13,9 +13,10 @@ const initialState = {
 export const createDeliveryAction = createAsyncThunk(
   'delivery/createDelivery',
   async (delivery, thunkAPI) => {
+    console.log(delivery, 'delivery in action')
     try {
       const response = await deliveryService.createDeliveryService(delivery)
-      console.log(response.data, 'createDeliveryAction')
+      console.log('createDeliveryAction=>', response.data)
       return response.data
     } catch (error) {
       const message =

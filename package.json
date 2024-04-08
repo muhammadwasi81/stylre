@@ -4,6 +4,9 @@
   "proxy": "http://127.0.0.1:8000",
   "private": true,
   "dependencies": {
+    "@cloudinary/base": "^1.0.0-beta.4",
+    "@cloudinary/react": "^1.13.0",
+    "@cloudinary/url-gen": "^1.19.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.9",
@@ -17,6 +20,7 @@
     "axios": "^1.4.0",
     "browser-image-compression": "^2.0.2",
     "canvas-confetti": "^1.6.0",
+    "cloudinary-react": "^1.8.1",
     "firebase": "^10.10.0",
     "flowbite": "^1.8.1",
     "flowbite-react": "^0.6.0",
