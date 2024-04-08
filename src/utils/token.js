@@ -7,8 +7,8 @@ const getAuthToken = () => {
 }
 
 const apiPrefix = axios.create({
-  baseURL: 'https://stylere.onrender.com/api/',
-  // baseURL: 'http://localhost:8000/api/',
+  // baseURL: 'https://stylere.onrender.com/api/',
+  baseURL: 'http://localhost:8000/api/',
 })
 
 apiPrefix.interceptors.request.use(function (config) {

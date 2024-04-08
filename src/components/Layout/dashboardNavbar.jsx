@@ -20,7 +20,7 @@ export const DashboardNavbar = (props) => {
   useEffect(() => {
     const auth = getAuth()
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-      console.log(firebaseUser, 'firebaseUser')
+      // console.log(firebaseUser, 'firebaseUser')
       if (firebaseUser) {
         setUserAvatar(firebaseUser.photoURL)
       }
