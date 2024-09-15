@@ -7,40 +7,17 @@ import { BiSolidDashboard } from 'react-icons/bi'
 import { HiOutlineUsers } from 'react-icons/hi'
 import { LiaProductHunt } from 'react-icons/lia'
 import { TbTruckDelivery } from 'react-icons/tb'
+import HomeIcon from '@mui/icons-material/Home'
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
+import HistoryIcon from '@mui/icons-material/History'
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet'
+import SettingsIcon from '@mui/icons-material/Settings'
 
 const oldRoutes = [
   {
-    id: 4,
-    path: '/Info',
-    name: 'Delivery Info',
-  },
-  {
-    id: 5,
-    path: '/Address',
-    name: 'Customer Info',
-  },
-  {
-    id: 6,
-    path: '/Payment',
-    name: 'Payment',
-  },
-  {
-    id: 7,
-    path: '/DeliveryStatus',
-    name: 'Delivery Status',
-  },
-  {
-    id: 8,
-    path: '/Confirmation',
-    name: 'Confirmation',
-  },
-]
-
-const navRoutes = [
-  {
-    href: '/Address',
+    href: '/',
     icon: <GroupIcon fontSize="small" />,
-    title: 'Customer Info',
+    title: 'Home',
   },
   {
     href: '/Info',
@@ -63,6 +40,35 @@ const navRoutes = [
     title: 'Confirmation',
   },
 ]
+
+const navRoutes = [
+  {
+    href: '/',
+    icon: <HomeIcon fontSize="small" />,
+    title: 'Home',
+  },
+  {
+    href: '/Info',
+    icon: <CalendarTodayIcon fontSize="small" />,
+    title: 'Schedule a Pickup',
+  },
+  {
+    href: '/pickup-history',
+    icon: <HistoryIcon fontSize="small" />,
+    title: 'Pickup History',
+  },
+  {
+    href: '/wallet',
+    icon: <AccountBalanceWalletIcon fontSize="small" />,
+    title: 'Wallet',
+  },
+  {
+    href: '/settings',
+    icon: <SettingsIcon fontSize="small" />,
+    title: 'Settings',
+  },
+]
+
 const adminRoutes = [
   {
     href: '/admin/dashboard',

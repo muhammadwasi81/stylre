@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import {
+  Avatar,
   Button,
   Drawer,
   IconButton,
@@ -8,7 +9,7 @@ import {
 } from '@mui/material'
 import { Box } from '@mui/system'
 import { Link, useNavigate } from 'react-router-dom'
-import Logo from '../../assets/img/transparent.png'
+import Logo from '../../assets/img/Logo.png'
 import PropTypes from 'prop-types'
 import LogoutIcon from '@mui/icons-material/Logout'
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded'
@@ -82,49 +83,49 @@ export const DashboardSidebar = (props) => {
 
   const routesToShow =
     (user && user?.isAdmin) || user?.data?.isAdmin ? adminRoutes : navRoutes
-
+  console.log(user)
   const content = (
     <>
       <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
         <div>
           <Box sx={{ p: 3 }}>
             <Link to="/">
-              <img alt="Logo" src={Logo} className="w-50" />
+              <img alt="Logo" src={Logo} className="w-[180px]" />
             </Link>
           </Box>
-          <Box sx={{ px: 2 }}>
-            <Box
+          <Box sx={{ display: 'flex', alignItems: 'center', mb: 2, ml: 2 }}>
+            <Avatar
+              src="/path-to-user-image.jpg"
+              alt="Angel P."
               sx={{
-                backgroundColor: '#f8931f',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                cursor: 'pointer',
-                px: 3,
-                py: '20px',
-                borderRadius: 1,
+                width: 50,
+                height: 50,
+                border: '2px solid #FF7009',
               }}
-            >
-              <div>
-                {(user && user?.isAdmin) || user?.data?.isAdmin === true ? (
-                  <Typography
-                    color="#fff"
-                    variant="h6"
-                    fontSize={14}
-                    gutterBottom
-                  >
-                    Admin
-                  </Typography>
-                ) : (
-                  <Typography color="#fff" variant="h6" fontSize={14}>
-                    Customer
-                  </Typography>
-                )}
-                <Typography color="#fff" variant="h6" fontSize={14}>
-                  Welcome:{' '}
-                  {(user && user?.userName) || user?.data?.userName || email}
-                </Typography>
-              </div>
+            />
+            <Box sx={{ ml: 1 }}>
+              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                {user?.data?.userName}
+              </Typography>
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  color: '#FF7009',
+                  fontWeight: 'medium',
+                }}
+              >
+                {user?.data?.isAdmin ? 'Manager Account' : 'Client Account'}
+              </Typography>
+              <Typography
+                variant="caption"
+                sx={{
+                  color: 'text.secondary',
+                  display: 'block',
+                  fontWeight: 500,
+                }}
+              >
+                Style.Re member since April 2024
+              </Typography>
             </Box>
           </Box>
         </div>

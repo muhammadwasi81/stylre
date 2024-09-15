@@ -168,27 +168,14 @@ input[type='number']::-webkit-outer-spin-button {
   background: none;
 }
 
-.signup-wrapper {
-  background: url('./assets/img/signup.png') no-repeat;
-  background-size: contain;
-  background-position: 100% 50%;
-  min-width: 100%;
-  min-height: 100vh;
-}
-.login-wrapper {
-  background: url('./assets/img/sun-tornado.svg') no-repeat;
+.auth-wrapper {
+  background: url('./assets/img/Rectangle\ 5.png');
   background-size: cover;
-  background-position: center;
-  min-width: 100%;
+  background-position: 100% 50%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   min-height: 100vh;
 }
-/* .delivery-wrapper {
-  background: url('./assets/img/customer.png') no-repeat;
-  background-size: contain;
-  background-position: 100% 50%;
-  min-width: 100%;
-  min-height: 100vh;
-} */
 
 .payment-info {
   background: url('./assets/img/payment.png') no-repeat;
@@ -219,27 +206,13 @@ input[type='number']::-webkit-outer-spin-button {
   transform: translateY(-50%);
   color: grey;
 }
-@media (max-width: 600px) {
-  .login-wrapper {
-    background-position: 100% 50%;
-  }
-  .signup-wrapper {
-    background-position: 100% 50%;
-  }
-  .delivery-wrapper {
-    background-position: 100% 50%;
-  }
-  .product-wrapper {
-    background-position: 100% 50%;
-  }
-  .icon-input .password-icon {
-    right: 15px;
-  }
-  .payment__btn {
-    width: 100%;
-  }
-  .stripe-card {
-    min-width: 270px !important;
-    width: 100%;
-  }
+
+.scrollbar-hide::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

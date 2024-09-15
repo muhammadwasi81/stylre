@@ -18,6 +18,10 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           textTransform: 'none',
+          '&:hover': {
+            backgroundColor: '#FF7009',
+            boxShadow: 'none',
+          },
         },
         sizeSmall: {
           padding: '6px 16px',
@@ -103,7 +107,7 @@ export const theme = createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         notchedOutline: {
-          borderColor: '#E6E8F0',
+          borderColor: '#FF7009',
         },
       },
     },
@@ -144,7 +148,7 @@ export const theme = createTheme({
       900: '#555555',
     },
     action: {
-      active: '#6B7280',
+      active: '#FF7009',
       focus: 'rgba(55, 65, 81, 0.12)',
       hover: 'rgba(55, 65, 81, 0.04)',
       selected: 'rgba(55, 65, 81, 0.08)',
@@ -152,13 +156,13 @@ export const theme = createTheme({
       disabled: 'rgba(55, 65, 81, 0.26)',
     },
     background: {
-      default: '#F9FAFC',
+      default: '#FF7009',
       paper: '#FFFFFF',
     },
     divider: '#E8E8E8',
     primary: {
-      main: '#5048E5',
-      light: '#828DF8',
+      main: '#FF7009',
+      light: '#fff',
       dark: '#3832A0',
       contrastText: '#FFFFFF',
     },

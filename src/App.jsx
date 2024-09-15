@@ -4,12 +4,11 @@ import 'react-toastify/dist/ReactToastify.css'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import NotFound from './pages/NotFound'
-import Dashboard from './pages/Dashboard'
+// import Dashboard from './pages/Dashboard'
 // import PaymentInfo from './pages/PaymentInfo'
 // import { Elements } from '@stripe/react-stripe-js'
 // import { loadStripe } from '@stripe/stripe-js'
 import ProductInfo from './pages/CustomerInfo'
-import DeliveryInfo from './pages/DeliveryInfo'
 import Confirmation from './pages/Confirmation'
 import { ThemeProvider } from '@emotion/react'
 import { theme } from './utils/theme'
@@ -18,6 +17,8 @@ import UsersList from './pages/UsersList'
 import ProductList from './pages/ProductList'
 import DeliveryList from './pages/DeliveryList'
 import AdminDashboard from './pages/AdminDashboard'
+import NewDashboard from './pages/NewDashboard'
+import PickupScheduler from './pages/NewDeliveryInfo'
 // const stripePromise = loadStripe(
 //   'pk_test_51MihFAKHS9EGHah4Zu1HV4k83qBovFz6HjJM1ACkqiLZstcTWfSisDTUZqGIbVDQJhqzrcioz1qpP4vlKehecqG900Xxexg2nu'
 // )
@@ -29,10 +30,10 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <Router>
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<NewDashboard />} />
             <Route path="/Login" element={<Login />} />
             <Route path="/Register" element={<Register />} />
-            <Route path="/Info" element={<DeliveryInfo />} />
+            <Route path="/Info" element={<PickupScheduler />} />
             <Route path="/Address" element={<ProductInfo />} />
             <Route path="/Confirmation" element={<Confirmation />} />
             <Route path="/DeliveryStatus" element={<DeliveryStatus />} />

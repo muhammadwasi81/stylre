@@ -9,7 +9,6 @@ const Nav = () => {
   const { user } = useSelector((state) => state.auth)
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  // console.log(user, 'user in nav')
 
   const onLogout = () => {
     dispatch(logoutAction())
@@ -52,7 +51,7 @@ const Nav = () => {
                 ))}
                 <li className="nav-item">
                   <button className="btn btn-danger" onClick={onLogout}>
-                    <FaSignOutAlt className="ml-auto" /> Logout
+                    <FaSignOutAlt className="ml-auto" /> Signout
                   </button>
                 </li>
               </>

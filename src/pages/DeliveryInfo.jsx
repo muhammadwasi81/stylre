@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Layout from './Layout'
 import { toast } from 'react-toastify'
-import { UUID, businessStores, pickUpAddress, storesData } from '../utils'
+import { UUID, businessStores, pickUpAddress } from '../utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { createDeliveryAction, reset } from '../features/delivery/deliverySlice'
 import customerInfoImg from '../assets/img/customer.png'

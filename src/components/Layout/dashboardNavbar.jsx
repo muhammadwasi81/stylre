@@ -1,71 +1,96 @@
-import { AppBar, Avatar, IconButton, Toolbar, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import MenuIcon from '@mui/icons-material/Menu'
-import styled from '@emotion/styled'
-import PropTypes from 'prop-types'
-import { Box } from '@mui/system'
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import React from 'react'
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+  Box,
+  useMediaQuery,
+} from '@mui/material'
+import { styled, useTheme } from '@mui/system'
+import { LocationOn, Menu } from '@mui/icons-material'
+import SchedulePickupIcon from '../../assets/svg/schedulebuttonIcon'
+import CartIcon from '../../assets/svg/cartIcon'
 
-const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
-  backgroundColor: theme.palette.background.paper,
-  boxShadow: theme.shadows[3],
-}))
+const StyledAppBar = styled(AppBar)({
+  backgroundColor: '#ffffff',
+  color: 'black',
+  boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+})
 
-export const label = { inputProps: { 'aria-label': 'Switch demo' } }
+const Logo = styled(Typography)({
+  fontWeight: 'bold',
+  fontSize: '1.5rem',
+  color: '#ff6600',
+})
 
-export const DashboardNavbar = (props) => {
-  const { onSidebarOpen, ...other } = props
-  const [avatarUrl, setUserAvatar] = useState('')
+const LocationButton = styled(Button)({
+  color: 'black',
+  borderRadius: '20px',
+  border: '1px solid #e0e0e0',
+  padding: '6px 16px',
+  textTransform: 'none',
+})
 
-  useEffect(() => {
-    const auth = getAuth()
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-      // console.log(firebaseUser, 'firebaseUser')
-      if (firebaseUser) {
-        setUserAvatar(firebaseUser.photoURL)
-      }
-    })
-    return () => {
-      unsubscribe()
-    }
-  }, [])
+const ScheduleButton = styled(Button)({
+  backgroundColor: '#ff6600',
+  color: 'white',
+  borderRadius: '20px',
+  padding: '6px 16px',
+  '&:hover': {
+    backgroundColor: '#e65c00',
+  },
+})
+
+const CartButton = styled(IconButton)({
+  backgroundColor: '#e0e0e0',
+  color: 'black',
+  padding: '8px',
+})
+
+const DashboardNavbar = ({ onSidebarOpen }) => {
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
+  const isTablet = useMediaQuery(theme.breakpoints.down('lg'))
 
   return (
-    <DashboardNavbarRoot
-      sx={{
-        left: { lg: 280 },
-        width: {
-          lg: 'calc(100% - 280px)',
-        },
-      }}
-      {...other}
-    >
-      <Toolbar disableGutters sx={{ minHeight: 64, left: 0, px: 2 }}>
+    <StyledAppBar position="fixed">
+      <Toolbar>
         <IconButton
+          color="inherit"
           onClick={onSidebarOpen}
-          sx={{ display: { xs: 'inline-flex', lg: 'none' } }}
+          sx={{ mr: 2, display: { lg: 'none' } }}
         >
-          <MenuIcon fontSize="small" />
+          <Menu />
         </IconButton>
-        <Typography
-          variant="h4"
-          color="black"
-          sx={{ display: { xs: 'none', lg: 'block' } }}
-        >
-          Welcome to Style.re
-        </Typography>
+        <Logo variant="h6">
+          style.<span style={{ color: '#ff6600' }}>re</span>
+        </Logo>
         <Box sx={{ flexGrow: 1 }} />
-
-        <Avatar
-          alt="Cindy Baker"
-          src={avatarUrl || 'https://mui.com/static/images/avatar/1.jpg'}
-          sx={{ height: 40, width: 40, ml: 1 }}
-        />
+        {!isMobile && (
+          <LocationButton
+            startIcon={<LocationOn />}
+            sx={{ mr: 1, display: { xs: 'none', md: 'flex' } }}
+          >
+            {isTablet ? '2992 Isabella...' : '2992 Isabella Circle'}
+          </LocationButton>
+        )}
+        {!isMobile && (
+          <ScheduleButton
+            variant="contained"
+            sx={{ mx: 1, display: { xs: 'none', md: 'flex' } }}
+          >
+            <SchedulePickupIcon /> &nbsp;{' '}
+            {isTablet ? 'Schedule' : 'Schedule a Pickup'}
+          </ScheduleButton>
+        )}
+        <CartButton sx={{ display: { xs: 'none', sm: 'flex' } }}>
+          <CartIcon />
+        </CartButton>
       </Toolbar>
-    </DashboardNavbarRoot>
+    </StyledAppBar>
   )
 }
 
-DashboardNavbar.propTypes = {
-  onSidebarOpen: PropTypes.func,
-}
+export default DashboardNavbar
