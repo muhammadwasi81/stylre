@@ -16,7 +16,7 @@ import { ReactComponent as Nordstrom } from '../assets/svg/nordstorm.svg'
 import { ReactComponent as OldNavy } from '../assets/svg/oldnavy.svg'
 import { ReactComponent as FootLocker } from '../assets/svg/footlocker.svg'
 import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa'
-import Logo from '../assets/img/Logo.png'
+
 import { ReactComponent as FooterLeave } from '../assets/svg/footerleave.svg'
 
 const CategoryButton = ({ icon: Icon, label }) => (
@@ -133,7 +133,11 @@ const NewDashboard = () => {
           <div className="container mx-auto">
             <div className="flex flex-col md:flex-row justify-between items-center md:items-start py-8">
               <div className="mb-6 md:mb-0">
-                <img src={Logo} alt="Style.re" className="h-6 w-[100px] mb-4" />
+                <img
+                  src={'/Logo.png'}
+                  alt="Style.re"
+                  className="h-6 w-[100px] mb-4"
+                />
                 <div className="flex space-x-4">
                   <a href="#" aria-label="Facebook">
                     <FaFacebookF className="text-gray-600" />

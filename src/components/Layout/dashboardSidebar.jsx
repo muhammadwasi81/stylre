@@ -9,7 +9,6 @@ import {
 } from '@mui/material'
 import { Box } from '@mui/system'
 import { Link, useNavigate } from 'react-router-dom'
-import Logo from '../../assets/img/Logo.png'
 import PropTypes from 'prop-types'
 import LogoutIcon from '@mui/icons-material/Logout'
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded'
@@ -90,7 +89,7 @@ export const DashboardSidebar = (props) => {
         <div>
           <Box sx={{ p: 3 }}>
             <Link to="/">
-              <img alt="Logo" src={Logo} className="w-[180px]" />
+              <img alt="Logo" src={'/Logo.png'} className="w-[180px]" />
             </Link>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center', mb: 2, ml: 2 }}>
