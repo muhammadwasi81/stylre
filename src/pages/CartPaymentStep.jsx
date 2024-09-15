@@ -320,7 +320,7 @@ const CartPaymentStep = ({ setCurrentStep }) => {
               <img
                 src="https://cdn.worldvectorlogo.com/logos/dillard-s.svg"
                 alt="Dillards logo"
-                className="mr-2 mt-1"
+                className="w-10 mr-2 mt-1"
               />
               <Box>
                 <Typography variant="body2" className="font-semibold">

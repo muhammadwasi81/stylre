@@ -27,11 +27,15 @@ const CategoryButton = ({ icon: Icon, label }) => (
 )
 
 const RetailerCard = ({ icon: Icon, name }) => (
-  <div className="overflow-hidden rounded-lg w-full p-2">
-    <Icon className="w-full h-32 sm:h-48 object-cover" />
-    <button className="flex justify-center w-full bg-orange-500 text-white font-semibold p-2 text-center text-xs sm:text-sm rounded-lg">
-      {name}
-    </button>
+  <div className="relative overflow-hidden rounded-lg w-full p-2">
+    <div className="relative pb-[75%]">
+      {' '}
+      {/* 4:3 aspect ratio */}
+      <Icon className="absolute top-0 left-0 w-full h-full object-cover" />
+      <button className="absolute rounded-lg bottom-0 left-0 right-0 bg-orange-500 text-white font-semibold p-2 text-center text-xs sm:text-sm">
+        {name}
+      </button>
+    </div>
   </div>
 )
 

@@ -27,18 +27,46 @@ const steps = [
 ]
 
 const stores = [
-  { name: "Dick's Sporting Goods", logo: '/api/placeholder/24/24' },
-  { name: 'Dillards', logo: '/api/placeholder/24/24' },
-  { name: 'Express', logo: '/api/placeholder/24/24' },
-  { name: 'Fabletics', logo: '/api/placeholder/24/24' },
-  { name: 'Finish Line', logo: '/api/placeholder/24/24' },
-  { name: 'Foot Action', logo: '/api/placeholder/24/24' },
-  { name: 'Foot Locker', logo: '/api/placeholder/24/24' },
-  { name: 'Forever21', logo: '/api/placeholder/24/24' },
-  { name: 'Free People', logo: '/api/placeholder/24/24' },
-  { name: 'Gap', logo: '/api/placeholder/24/24' },
-  { name: 'Guess', logo: '/api/placeholder/24/24' },
-  { name: 'H&M', logo: '/api/placeholder/24/24' },
+  {
+    name: "Dick's Sporting Goods",
+    logo: 'https://e7.pngegg.com/pngimages/133/476/png-clipart-dick-s-sporting-goods-logo-shop-logos.png',
+  },
+  {
+    name: 'Dillards',
+    logo: 'https://cdn.worldvectorlogo.com/logos/dillard-s.svg',
+  },
+  {
+    name: 'Express',
+    logo: 'https://marvel-b1-cdn.bc0a.com/f00000000295809/mallmaverick.imgix.net/web/property_managers/1/properties/708/all/20240305155016/Express_logo_PNG__4_.png?auto=format,compress&fit=clamp',
+  },
+  {
+    name: 'Fabletics',
+    logo: 'https://mma.prnewswire.com/media/1153913/Fabletics_Men_Logo.jpg?p=facebook',
+  },
+  {
+    name: 'Finish Line',
+    logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZNciN2aBchv3CPH2C71Hj3a7zwv3tbRpMcQ&s',
+  },
+  {
+    name: 'Foot Action',
+    logo: 'https://mma.prnewswire.com/media/290142/footaction_logo.jpg?p=facebook',
+  },
+  {
+    name: 'Foot Locker',
+    logo: 'https://logos-world.net/wp-content/uploads/2022/04/Foot-Locker-Logo.png',
+  },
+  {
+    name: 'Forever21',
+    logo: 'https://logowik.com/content/uploads/images/forever-213670.logowik.com.webp',
+  },
+  {
+    name: 'Free People',
+    logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVU5hRsSBfQ_Z9nqYNVsW-lFZgi1hhmyGOig&s',
+  },
+  {
+    name: 'H&M',
+    logo: 'https://i.pinimg.com/736x/94/8c/7f/948c7f31df5eb63955907221228842d7.jpg',
+  },
 ]
 
 const CustomStep = ({ label, active }) => (
@@ -126,7 +154,7 @@ const PickupScheduler = () => {
                         <img
                           src={store.logo}
                           alt={`${store.name} logo`}
-                          className="mr-2"
+                          className="w-10 mr-2 rounded-full"
                         />
                         <Typography>{store.name}</Typography>
                       </Box>
@@ -179,7 +207,7 @@ const PickupScheduler = () => {
                             ?.logo
                         }
                         alt={`${selectedStore} logo`}
-                        className="mr-2"
+                        className="w-10 mr-2"
                       />
                       <Typography>{selectedStore}</Typography>
                     </Box>
